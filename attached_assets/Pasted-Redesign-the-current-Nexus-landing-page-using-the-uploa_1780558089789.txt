@@ -1,0 +1,133 @@
+Redesign the current Nexus landing page using the uploaded image as the primary design reference.
+
+IMPORTANT:
+
+Match the overall layout, spacing, premium feel, and visual hierarchy from the uploaded image.
+Do NOT copy the image exactly.
+Recreate the same luxury fintech aesthetic using the existing Nexus brand.
+Branding
+
+Use the official Nexus logo.
+
+Tagline:
+
+CONNECTED FINANCE. SIMPLIFIED.
+
+Remove Completely
+
+Remove:
+
+Total Balance card
+Any balance amounts
+Account count
+Financial statistics
+Dashboard widgets
+Any banking data
+
+This is a pre-authentication landing page and should not display financial information.
+
+Hero Section
+
+Large headline:
+
+All Your Money. One Place.
+
+Supporting text:
+
+Connect your bank accounts, track transactions, and move money seamlessly from a single secure platform.
+
+Include a premium fintech illustration inspired by the uploaded design:
+
+Dark luxury wallet
+Multiple bank cards
+Gold glowing accents
+Soft floating effects
+Premium 3D look
+Features Section
+
+Title:
+
+What You Can Do
+
+Three premium feature cards:
+
+Connect
+
+Link icon
+
+Connect all your financial accounts securely.
+
+Transfer
+
+Send icon
+
+Move money across accounts and send payments easily.
+
+Track
+
+Analytics icon
+
+Monitor transactions and gain financial insights.
+
+Security Section
+
+Premium glass card
+
+Shield icon
+
+Title:
+
+Your Security Is Our Priority
+
+Description:
+
+Bank-level security, encrypted connections, secure authentication, and privacy-first design.
+
+Buttons
+
+Primary CTA:
+
+Create Account
+
+Gold gradient button
+
+Secondary CTA:
+
+Sign In
+
+Dark outlined button
+
+Styling Requirements
+
+Use the uploaded image as visual inspiration.
+
+Color Palette:
+
+Background: #050505
+Gold Accent: #D4AF37
+Gold Gradient: #C89B3C → #F2D16B
+White Text
+Dark Glass Cards
+
+Effects:
+
+Soft gold glows
+Glassmorphism
+Smooth hover animations
+Premium shadows
+Luxury fintech appearance
+
+Typography:
+
+Modern
+Clean
+Spacious
+Similar quality to Revolut, Apple, Stripe, and Amex
+
+Mobile Requirements:
+
+Fully responsive
+Mobile-first
+Looks identical in quality to the uploaded design
+
+Keep all existing routing, authentication, and backend functionality unchanged. Only redesign the landing page UI to match the uploaded reference image and Nexus branding.

@@ -1,0 +1,1 @@
+- [Nexus project setup](nexus-setup.md) — fintech Expo app with Express backend; JWT auth, Drizzle ORM, demo data seeded on signup

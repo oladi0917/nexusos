@@ -1,0 +1,591 @@
+IMPORTANT: ANALYZE THE EXISTING MVP FIRST
+
+Before making any changes:
+
+Analyze the entire existing Nexus codebase.
+Preserve all working functionality.
+Preserve all existing pages.
+Preserve all existing navigation.
+Preserve all existing authentication.
+Preserve all working transfer functionality.
+Preserve all working dashboard functionality.
+Preserve all existing UI components where possible.
+
+DO NOT rebuild the application from scratch.
+
+DO NOT duplicate pages that already exist.
+
+DO NOT remove features that are already working.
+
+Only improve, extend, and integrate new features into the existing MVP.
+
+The goal is to evolve the current Nexus application into a production-ready fintech platform while maintaining consistency across the entire app.
+
+CORE VISION
+
+Nexus is not a bank.
+
+Nexus is a financial control platform that allows users to:
+
+Connect multiple bank accounts
+Connect debit cards
+Connect multiple phone numbers
+View all balances in one place
+Track transactions across platforms
+Send money from multiple sources simultaneously
+Manage a Nexus Wallet
+Authorize transfers with one Nexus PIN
+Tag incoming credit alerts
+Control their financial life from one interface
+
+Goal:
+
+One place to see, manage, and move all your money.
+
+DESIGN LANGUAGE
+
+The app should feel like a luxury fintech product.
+
+Inspired by:
+
+Revolut
+Apple Card
+American Express
+Monzo
+Modern Private Banking Apps
+Colors
+
+Background:
+
+#050505
+
+Gold:
+
+#D4AF37
+
+Gradient:
+
+#C89B3C → #F2D16B
+
+Text:
+
+#FFFFFF
+VISUAL STYLE
+
+Use:
+
+Glassmorphism
+Premium shadows
+Soft gold glows
+Smooth animations
+Elegant spacing
+Modern typography
+Mobile-first design
+Fully responsive layouts
+LOGO
+
+Use the uploaded Nexus logo consistently throughout the application.
+
+Place logo on:
+
+Splash Screen
+Landing Page
+Login
+Signup
+Dashboard
+Accounts
+Cards
+Wallet
+Transactions
+Profile
+Loading Screens
+
+Never distort the logo.
+
+SPLASH SCREEN
+
+Display:
+
+Nexus Logo
+
+NEXUS
+
+CONNECTED FINANCE. SIMPLIFIED.
+
+Add subtle gold glow animation.
+
+LANDING PAGE
+
+IMPORTANT:
+
+Do NOT show balances.
+
+Do NOT show account numbers.
+
+Do NOT show dashboard data.
+
+Hero
+
+Headline:
+
+All Your Money. One Place.
+
+Subheadline:
+
+Connect your bank accounts, cards, track transactions, and move money seamlessly from a single secure platform.
+
+Buttons:
+
+Create Account
+Sign In
+AUTHENTICATION
+Signup
+
+Fields:
+
+First Name
+Last Name
+Email
+Phone Number
+Password
+Confirm Password
+Login
+
+Fields:
+
+Email
+Password
+DASHBOARD
+
+Display:
+
+Nexus Balance
+
+Total value across:
+
+Linked Banks
+Linked Cards
+Nexus Wallet
+
+Example:
+
+GTBank        ₦100,000
+Opay           ₦25,000
+Kuda           ₦50,000
+Wallet         ₦10,000
+
+Nexus Balance ₦185,000
+Nexus Wallet Balance
+
+Display separately.
+
+Quick Actions
+Send
+Receive
+Add Account
+Add Card
+Link Phone Number
+Fund Wallet
+HOMEPAGE FINANCIAL SOURCES CAROUSEL
+
+IMPORTANT:
+
+Do not remove existing dashboard cards.
+
+Insert this section between:
+
+Quick Actions
+
+and
+
+Recent Transactions
+
+My Financial Sources
+
+Create a horizontal scrollable carousel.
+
+Display:
+
+Linked Accounts
+GTBank
+₦100,000
+Opay
+₦25,000
+Kuda
+₦50,000
+Linked Cards
+Visa ****4581
+Mastercard ****1923
+Linked Phone Numbers
+07049410779
+08012345678
+Nexus Wallet
+Nexus Wallet
+₦10,000
+
+Each item should:
+
+Match the black and gold theme
+Use glassmorphism
+Support tap interaction
+Open detailed views
+ACCOUNTS PAGE
+
+Display all linked accounts.
+
+Examples:
+
+GTBank
+Access
+Zenith
+UBA
+Kuda
+Opay
+PalmPay
+Moniepoint
+
+Allow:
+
+View Details
+Remove Account
+Refresh Account
+LINK PHONE NUMBERS
+
+Allow users to link multiple phone numbers.
+
+Flow:
+
+Step 1
+
+Enter phone number
+
+Step 2
+
+Receive OTP
+
+Step 3
+
+Verify
+
+Step 4
+
+Phone number added
+
+Examples:
+
+07049410779
+08012345678
+08198765432
+CARDS PAGE
+
+Add Cards as a dedicated section.
+
+Also add Cards to bottom navigation.
+
+Bottom Navigation
+
+Preserve existing navigation.
+
+Add:
+
+Home
+Accounts
+Cards
+Transactions
+Profile
+
+or integrate Cards into the current structure.
+
+Cards Page
+
+Display:
+
+Visa ****4581
+Mastercard ****1923
+
+Show:
+
+Status
+Last Used
+Funding Capability
+
+Actions:
+
+Add Card
+Remove Card
+Rename Card
+View Activity
+ADD CARD FLOW
+
+Fields:
+
+Card Number
+Expiry Date
+CVV
+Cardholder Name
+
+Verify card before adding.
+
+Store tokenized cards only.
+
+Never store:
+
+Full card numbers
+CVV
+NEXUS WALLET
+
+Functions:
+
+View Balance
+Fund Wallet
+Transfer
+Receive
+Withdraw
+SEND MONEY
+
+This is the most important feature.
+
+Preserve any existing transfer functionality.
+
+Enhance it without breaking current workflows.
+
+TRANSFER TYPES
+
+When user taps:
+
+Send Money
+
+Show:
+
+Transfer To
+Transfer To Self
+
+Move funds between the user's own linked financial sources.
+
+Examples:
+
+GTBank → Opay
+Wallet → GTBank
+Opay → Wallet
+Beneficiary
+
+Transfer to saved beneficiary.
+
+Display:
+
+Name
+Bank
+Account Number
+Third Party
+
+Transfer to someone not saved.
+
+Fields:
+
+Bank
+Account Number
+Recipient Name
+RECIPIENT SELECTION DROPDOWN
+
+When selecting destination:
+
+Show a searchable dropdown.
+
+Include:
+
+Linked Accounts
+GTBank - Emmanuel
+Opay - Emmanuel
+Kuda - Emmanuel
+PalmPay - Emmanuel
+Linked Phone Numbers
+07049410779
+08012345678
+Nexus Wallet
+Nexus Wallet
+Linked Cards
+Visa ****4581
+Mastercard ****1923
+MULTI-SOURCE FUNDING
+
+Users can combine multiple funding sources.
+
+Sources:
+
+Banks
+GTBank
+Opay
+Kuda
+Cards
+Visa ****4581
+Mastercard ****1923
+Wallet
+Nexus Wallet
+
+User can allocate custom amounts.
+
+Example:
+
+GTBank         ₦20,000
+Visa Card      ₦15,000
+Wallet         ₦15,000
+
+Total          ₦50,000
+TRANSFER AUTHORIZATION
+
+Use:
+
+Nexus PIN
+
+Future support:
+
+Face ID
+Fingerprint
+CREDIT ALERT TAGGING
+
+Allow users to tag incoming transfers.
+
+Examples:
+
+Salary
+Rent
+Gift
+Client Payment
+Business Revenue
+
+Users should be able to edit tags later.
+
+TRANSACTIONS PAGE
+
+Unified history.
+
+Display:
+
+Date
+Time
+Amount
+Type
+Source
+Destination
+Status
+Tags
+PROFILE PAGE
+
+Display:
+
+Name
+Email
+Phone Numbers
+Security Settings
+Linked Accounts
+Linked Cards
+SECURITY FEATURES
+
+Implement:
+
+Authentication
+Secure passwords
+Session management
+Email verification
+Future
+2FA
+Device Management
+Biometrics
+API Security
+HTTPS
+Secure tokens
+Backend-only secrets
+Fraud Prevention
+Rate limiting
+Suspicious activity detection
+Transaction monitoring
+LEDGER SYSTEM
+
+Every transaction should record:
+
+Transaction ID
+User ID
+Timestamp
+Amount
+Source
+Destination
+Status
+Reference
+
+For multi-source transfers:
+
+GTBank         ₦15,000
+Visa Card      ₦10,000
+Wallet         ₦25,000
+
+Recipient      ₦50,000
+NEXUS BALANCE SYSTEM
+Nexus Balance
+
+Total balance across:
+
+Banks
+Cards (where applicable)
+Wallet
+Nexus Wallet Balance
+
+Separate balance.
+
+Used as:
+
+Settlement layer
+Funding source
+Transfer engine
+PARTNER INTEGRATIONS
+Account Aggregation
+
+Mono
+
+Purpose:
+
+Link accounts
+Read balances
+Read transactions
+Payments
+Paystack
+Flutterwave
+Monnify
+
+Purpose:
+
+Transfers
+Card funding
+Payouts
+Banking Infrastructure
+Anchor
+OnePipe
+
+Purpose:
+
+Wallets
+Virtual accounts
+Settlement
+KYC
+Prembly
+Dojah
+Smile Identity
+VerifyMe
+FINAL PRODUCT GOAL
+
+A user should be able to:
+
+Open Nexus
+See all linked accounts, cards, phone numbers, and wallet balances
+View one unified Nexus Balance
+Transfer money to self, beneficiaries, or third parties
+Combine multiple funding sources into a single transfer
+Authorize once using a Nexus PIN
+Track all activity from one place
+Tag incoming credits
+Manage their entire financial ecosystem without switching between banking apps
+
+Final mission:
+
+Build the ultimate financial control platform where users can see all their money, manage all their money, and move all their money from one place.
+
+CONNECTED FINANCE. SIMPLIFIED.

@@ -1,0 +1,122 @@
+PROMPT FOR REPLIT AI
+
+Use the uploaded Nexus logo throughout the application to create a consistent premium brand identity.
+
+IMPORTANT:
+
+Use the uploaded logo as the official Nexus brand logo.
+Maintain the current black and gold luxury fintech theme.
+Do not stretch, distort, recolor, or modify the logo.
+Ensure the logo appears professionally and consistently across the entire application.
+Logo Placement Requirements
+1. Splash Screen
+
+Center the Nexus logo prominently.
+
+Below logo:
+
+NEXUS
+
+Below that:
+
+CONNECTED FINANCE. SIMPLIFIED.
+
+Add subtle gold glow animation.
+
+2. Landing Page
+
+Place the logo at the top center.
+
+Display:
+
+Logo
+
+NEXUS
+
+CONNECTED FINANCE. SIMPLIFIED.
+
+3. Sign Up Page
+
+Place a smaller version of the logo above the Sign Up form.
+
+Maintain premium spacing.
+
+4. Sign In Page
+
+Place the logo above the Sign In form.
+
+Keep branding consistent with Sign Up.
+
+5. Dashboard Header
+
+Top-left:
+
+Nexus logo
+
+Next to logo:
+
+Nexus
+
+Do not make the logo excessively large.
+
+Use a professional fintech-style header.
+
+6. Accounts Page
+
+Display logo in the page header.
+
+7. Transactions Page
+
+Display logo in the page header.
+
+8. Send Money Page
+
+Display logo in the page header.
+
+9. Wallet Page
+
+Display logo in the page header.
+
+10. Profile Page
+
+Display logo at the top of the profile section.
+
+11. Navigation Bar
+
+Use a simplified version of the Nexus logo as the center navigation icon if appropriate.
+
+Maintain visual balance.
+
+12. Loading States
+
+Use the logo for loading screens.
+
+Add subtle:
+
+fade animation
+glow animation
+pulse effect
+
+Keep animations elegant and professional.
+
+Design Standards
+
+Use the logo consistently but avoid overuse.
+
+Follow these sizes:
+
+Splash Screen: Large
+Landing Page: Medium
+Auth Screens: Small-Medium
+Dashboard Headers: Small
+Navigation: Small
+
+Maintain:
+
+Premium fintech appearance
+Luxury black and gold aesthetic
+Consistent spacing
+Professional alignment
+Mobile responsiveness
+
+Ensure the uploaded Nexus logo becomes the primary visual identity across the entire application while preserving a clean and modern user experience.

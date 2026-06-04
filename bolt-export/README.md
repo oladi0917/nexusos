@@ -1,0 +1,89 @@
+# Nexus — Bolt Export
+
+A luxury fintech web app built with **Vite + React + TypeScript** (client) and **Express + Drizzle ORM + PostgreSQL** (server).
+
+## Prerequisites
+
+- Node.js 18+
+- PostgreSQL database (local or hosted)
+- `npm` or `pnpm`
+
+## Quick Start
+
+### 1. Set up the server
+
+```bash
+cd server
+cp .env.example .env
+# Edit .env and set DATABASE_URL to your PostgreSQL connection string
+npm install
+npm run db:push     # push schema to database
+npm run dev
+```
+
+### 2. Set up the client (in a new terminal)
+
+```bash
+cd client
+cp .env.example .env
+# VITE_API_URL defaults to http://localhost:4000 — update if needed
+npm install
+npm run dev
+```
+
+### 3. Or run both together from root
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+## Credentials
+
+Sign up for a new account — demo data (2 bank accounts, 8 transactions) is seeded automatically on signup.
+
+## Tech Stack
+
+| Layer    | Tech                                              |
+|----------|---------------------------------------------------|
+| Client   | Vite, React 18, TypeScript, React Router v6, Tailwind CSS |
+| Server   | Express, TypeScript, Drizzle ORM, PostgreSQL      |
+| Auth     | JWT (Bearer tokens, stored in localStorage)       |
+
+## API Endpoints
+
+| Method | Path                     | Auth | Description                  |
+|--------|--------------------------|------|------------------------------|
+| POST   | /api/auth/signup         | No   | Create account (seeds demo data) |
+| POST   | /api/auth/login          | No   | Login                        |
+| GET    | /api/auth/me             | Yes  | Current user                 |
+| GET    | /api/dashboard           | Yes  | Totals + recent transactions |
+| GET    | /api/accounts            | Yes  | List accounts                |
+| POST   | /api/accounts            | Yes  | Add account                  |
+| DELETE | /api/accounts/:id        | Yes  | Remove account               |
+| GET    | /api/transactions        | Yes  | List transactions             |
+| GET    | /api/transactions/:id    | Yes  | Transaction detail           |
+| POST   | /api/transfers/resolve   | Yes  | Resolve account number       |
+| POST   | /api/transfers           | Yes  | Send money                   |
+| GET    | /api/users/profile       | Yes  | User profile                 |
+| PATCH  | /api/users/profile       | Yes  | Update profile               |
+| GET    | /api/banks               | No   | List supported banks         |
+| GET    | /api/health              | No   | Health check                 |
+
+## Environment Variables
+
+### Server (`server/.env`)
+
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/nexus
+JWT_SECRET=change-this-to-a-random-secret
+PORT=4000
+```
+
+### Client (`client/.env`)
+
+```
+VITE_API_URL=http://localhost:4000
+```

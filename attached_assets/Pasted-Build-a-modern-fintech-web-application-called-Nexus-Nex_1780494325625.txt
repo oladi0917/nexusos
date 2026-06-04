@@ -1,0 +1,164 @@
+Build a modern fintech web application called Nexus.
+
+Nexus is a financial management platform that allows users to view multiple bank accounts in one dashboard, see combined balances, track transactions, and send money. For this MVP, use realistic demo data and simulated banking functionality. The architecture should be structured so real integrations with Mono/Okra and Paystack can be added later.
+
+Tech Requirements
+Full-stack application
+Modern responsive design
+Clean code structure
+Use realistic sample data
+Store data in a database
+Authentication system with signup and login
+Professional fintech UI
+Design Requirements
+Premium fintech appearance
+White base UI with subtle gold gradient accents
+Modern card layouts
+Soft shadows and clean spacing
+Mobile-friendly and desktop-friendly
+Feel similar to a premium digital banking platform
+Features
+Authentication
+Welcome page
+Sign up page
+Login page
+User session management
+Redirect authenticated users to dashboard
+Dashboard
+
+Display:
+
+Total combined balance
+Number of connected accounts
+Recent transactions
+Quick action buttons:
+Send Money
+My Accounts
+Transactions
+My Accounts
+
+Create a dedicated page showing:
+
+All connected accounts
+Bank name
+Account number
+Account holder name
+Current balance
+Add Account button
+
+Use realistic sample banks:
+
+GTBank
+Access Bank
+Zenith Bank
+UBA
+First Bank
+Kuda
+Opay
+PalmPay
+Add Account Flow
+
+Create a simulated bank connection flow:
+
+Select bank
+Secure consent screen
+Connect account
+Success screen
+
+Connected accounts should appear in My Accounts.
+
+Send Money Flow
+
+Step 1:
+
+Select source account
+
+Step 2:
+
+Select recipient bank
+
+Step 3:
+
+Enter account number
+
+Step 4:
+
+Display recipient name
+
+Step 5:
+
+Enter amount
+
+Step 6:
+
+Confirmation screen
+
+Step 7:
+
+Success screen
+
+After transfer:
+
+Deduct balance from source account
+Create transaction record
+Update dashboard
+Transactions
+
+Create transaction history page showing:
+
+Amount
+Date
+Description
+Credit or debit indicator
+Source account
+Transaction Details
+
+When a transaction is opened:
+
+Show transaction information
+Allow user to add:
+Tag
+Category
+Personal note
+
+Categories:
+
+Salary
+Business Income
+Refund
+Gift
+Investment
+Other
+Profile
+
+Create profile page with:
+
+User information
+Settings
+Security settings
+Navigation
+
+Create bottom navigation:
+
+Home
+Accounts
+Send
+Transactions
+Profile
+Data Model
+
+Create database models for:
+
+Users
+Accounts
+Transactions
+Transaction Tags
+Notes
+Future Readiness
+
+Structure the application so future integrations can be added for:
+
+Mono/Okra (bank account aggregation)
+Paystack (payments and transfers)
+
+The application should feel like a real fintech product, not a prototype, with realistic demo data, polished user experience, and professional design.
