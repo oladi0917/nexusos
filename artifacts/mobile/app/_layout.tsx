@@ -16,11 +16,10 @@ import { setBaseUrl } from "@workspace/api-client-react";
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
-// Set base URL outside component — called once at module load
 setBaseUrl(`https://${process.env.EXPO_PUBLIC_DOMAIN}`);
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
@@ -31,14 +30,12 @@ function RootLayoutNav() {
       <Stack.Screen name="index" />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
-      <Stack.Screen
-        name="transactions/[id]"
-        options={{ presentation: "card" }}
-      />
-      <Stack.Screen
-        name="accounts/add"
-        options={{ presentation: "card" }}
-      />
+      <Stack.Screen name="transactions/[id]" options={{ presentation: "card" }} />
+      <Stack.Screen name="accounts/add" options={{ presentation: "card" }} />
+      <Stack.Screen name="numbers/add" options={{ presentation: "card" }} />
+      <Stack.Screen name="profile/about" options={{ presentation: "card" }} />
+      <Stack.Screen name="profile/help" options={{ presentation: "card" }} />
+      <Stack.Screen name="profile/security" options={{ presentation: "card" }} />
     </Stack>
   );
 }
@@ -65,9 +62,11 @@ export default function RootLayout() {
         <QueryClientProvider client={queryClient}>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <KeyboardProvider>
-              <AuthProvider>
-                <RootLayoutNav />
-              </AuthProvider>
+              <ThemeProvider>
+                <AuthProvider>
+                  <RootLayoutNav />
+                </AuthProvider>
+              </ThemeProvider>
             </KeyboardProvider>
           </GestureHandlerRootView>
         </QueryClientProvider>

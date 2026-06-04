@@ -1,0 +1,411 @@
+PHONE NUMBER HUB (CORE NEXUS FEATURE)
+
+Phone numbers should be treated as a major financial identity layer within Nexus, alongside:
+
+Bank Accounts
+Cards
+Nexus Wallet
+
+Phone numbers are not just profile information.
+
+They should be visible and manageable throughout the platform.
+
+LINKED PHONE NUMBERS PAGE
+
+Create a dedicated page called:
+
+Linked Numbers
+
+Display all linked phone numbers.
+
+Example:
+
+Primary Number
+
+07049410779
+Verified
+Default
+
+Secondary Numbers
+
+08012345678
+Verified
+
+08198765432
+Verified
+
+Actions:
+
+Add Number
+Remove Number
+Set Default Number
+Rename Number
+View Activity
+LINK PHONE NUMBER FLOW
+Step 1
+
+Enter phone number
+
+Step 2
+
+OTP verification
+
+Step 3
+
+Verification success
+
+Step 4
+
+Number appears in linked numbers list
+
+DASHBOARD INTEGRATION
+
+In the horizontal financial sources carousel, include phone numbers alongside accounts and cards.
+
+Example:
+
+GTBank
+₦100,000
+
+Opay
+₦25,000
+
+Visa ****4581
+
+07049410779
+
+08012345678
+
+Nexus Wallet
+₦10,000
+
+All cards should be horizontally scrollable.
+
+PROFILE PAGE
+
+Show:
+
+Linked Accounts: 5
+
+Linked Cards: 2
+
+Linked Numbers: 3
+
+Include a dedicated section:
+
+Phone Numbers
+
+Display all linked numbers.
+
+SEND MONEY INTEGRATION
+
+When selecting a recipient, users should be able to choose:
+
+Transfer To Self
+
+Show:
+
+Linked Accounts
+Linked Cards
+Linked Numbers
+Nexus Wallet
+Beneficiary
+
+Show saved beneficiaries.
+
+Third Party
+
+Search by:
+
+Account Number
+Phone Number
+Beneficiary Name
+PHONE NUMBER DROPDOWN
+
+Whenever a dropdown is shown for destination selection, include:
+
+My Accounts
+
+GTBank
+Opay
+Kuda
+
+My Cards
+
+Visa ****4581
+Mastercard ****1923
+
+My Numbers
+
+07049410779
+08012345678
+
+Nexus Wallet
+FUTURE PHONE PAYMENTS
+
+Design the architecture so that future versions of Nexus can support:
+
+Send Money to Phone Number
+Request Money by Phone Number
+Phone Number Discovery
+Nexus User Lookup by Phone Number
+
+without requiring major redesign.
+
+BOTTOM NAVIGATION UPDATE
+
+If space permits, add:
+
+Home
+Accounts
+Cards
+Numbers
+Transactions
+Profile
+
+Otherwise place Numbers under Accounts while keeping a dedicated Numbers page.
+
+NEXUS ECOSYSTEM SUMMARY
+
+The homepage should immediately communicate that Nexus unifies:
+
+Bank Accounts
+Cards
+Phone
+also the flow for sendng from card and account was not corrected
+
+Good catch. The current prompt still treats cards and bank accounts like they are direct transfer sources, which isn't how the flow you described actually works.
+
+Your vision is:
+
+User Experience
+
+User selects:
+
+Send ₦50,000
+
+Funding Sources:
+
+GTBank          ₦20,000
+Opay            ₦15,000
+Visa Card       ₦10,000
+Nexus Wallet     ₦5,000
+
+User enters:
+
+Nexus PIN
+
+Then taps:
+
+Send
+
+To the user:
+
+GTBank debited
+Opay debited
+Visa debited
+Wallet debited
+
+Recipient credited ₦50,000
+
+The user never sees any intermediate steps.
+
+CORRECT TRANSFER ENGINE (ADD TO MASTER PROMPT)
+NEXUS SETTLEMENT MODEL
+
+Nexus should use a hidden settlement layer.
+
+The user experience must remain simple.
+
+Users should never be required to:
+
+Move money manually to wallet first
+Fund wallet before every transfer
+Perform multiple approvals
+Switch between banks
+TRANSFER EXECUTION FLOW
+
+When a transfer is initiated:
+
+Step 1
+
+User selects recipient.
+
+Step 2
+
+User enters amount.
+
+Example:
+
+₦50,000
+Step 3
+
+User selects funding sources.
+
+Example:
+
+GTBank         ₦20,000
+Opay           ₦15,000
+Visa Card      ₦10,000
+Wallet          ₦5,000
+Step 4
+
+User confirms.
+
+Step 5
+
+User enters Nexus PIN.
+
+Step 6
+
+Nexus processes transaction.
+
+Behind the scenes:
+
+GTBank Debit
+Opay Debit
+Visa Debit
+Wallet Debit
+
+↓
+
+Nexus Settlement Layer
+
+↓
+
+Recipient Credit
+
+The settlement process should be invisible to users.
+
+USER INTERFACE RULE
+
+Never show:
+
+Move To Wallet
+Fund Wallet First
+Transfer To Wallet
+
+during a normal transfer flow.
+
+The wallet aggregation process is internal.
+
+CARD FUNDING FLOW
+
+Cards should not behave like bank accounts.
+
+Cards are funding instruments.
+
+Users can:
+
+Use Card as Transfer Funding Source
+
+Example:
+
+Visa ****4581
+
+Contribution:
+₦10,000
+
+Nexus debits the card and contributes the amount toward the transfer.
+
+Fund Nexus Wallet With Card
+
+Separate flow:
+
+Wallet
+
+↓
+
+Fund Wallet
+
+↓
+
+Select Card
+
+↓
+
+Enter Amount
+
+Example:
+
+Visa ****4581
+
+₦20,000
+
+Result:
+
+Card Debited
+
+↓
+
+Wallet Credited
+ACCOUNT FUNDING FLOW
+
+Bank accounts should support:
+
+Direct Contribution
+
+Example:
+
+GTBank
+
+Contribution:
+₦20,000
+
+without requiring the user to manually move funds first.
+
+TRANSFER TO SELF
+
+When user chooses:
+
+Transfer To Self
+
+Allow:
+
+GTBank → Opay
+
+GTBank → Wallet
+
+Wallet → GTBank
+
+Opay → Wallet
+
+Wallet → Card Settlement Funding (where supported)
+
+Show source and destination clearly.
+
+NEXUS TOTAL BALANCE
+
+Homepage should show:
+
+Nexus Balance
+
+which includes:
+
+All Linked Banks
++
+Nexus Wallet Balance
+
+Cards should be displayed as linked funding sources but should not automatically be added to the total balance unless real card balance data is available from an approved provider.
+
+FUNDING SOURCE SELECTION UI
+
+Funding sources should be displayed as selectable chips/cards:
+
+✓ GTBank        ₦20,000
+
+✓ Opay          ₦15,000
+
+✓ Visa          ₦10,000
+
+✓ Wallet         ₦5,000
+
+User can manually allocate amounts.
+
+A progress indicator should show:
+
+Amount Needed: ₦50,000
+
+Allocated: ₦50,000
+
+Ready To Send

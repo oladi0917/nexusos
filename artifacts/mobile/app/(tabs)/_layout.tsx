@@ -5,8 +5,9 @@ import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
 import { SymbolView } from "expo-symbols";
 import { Feather } from "@expo/vector-icons";
 import React from "react";
-import { Platform, StyleSheet, View, useColorScheme } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { useColors } from "@/hooks/useColors";
+import { useTheme } from "@/context/ThemeContext";
 
 function NativeTabLayout() {
   return (
@@ -23,6 +24,10 @@ function NativeTabLayout() {
         <Icon sf={{ default: "wallet.pass", selected: "wallet.pass.fill" }} />
         <Label>Cards</Label>
       </NativeTabs.Trigger>
+      <NativeTabs.Trigger name="numbers">
+        <Icon sf={{ default: "phone", selected: "phone.fill" }} />
+        <Label>Numbers</Label>
+      </NativeTabs.Trigger>
       <NativeTabs.Trigger name="transactions">
         <Icon sf={{ default: "list.bullet.rectangle", selected: "list.bullet.rectangle.fill" }} />
         <Label>History</Label>
@@ -37,8 +42,7 @@ function NativeTabLayout() {
 
 function ClassicTabLayout() {
   const colors = useColors();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
+  const { isDark } = useTheme();
   const isIOS = Platform.OS === "ios";
   const isWeb = Platform.OS === "web";
 
@@ -54,7 +58,7 @@ function ClassicTabLayout() {
           borderTopWidth: 1,
           borderTopColor: colors.border,
           elevation: 0,
-          ...(isWeb ? { height: 84 } : {}),
+          ...(isWeb ? { height: 64 } : {}),
         },
         tabBarLabelStyle: {
           fontFamily: "Inter_500Medium",
@@ -78,9 +82,9 @@ function ClassicTabLayout() {
           title: "Home",
           tabBarIcon: ({ color, focused }) =>
             isIOS ? (
-              <SymbolView name={focused ? "house.fill" : "house"} tintColor={color} size={24} />
+              <SymbolView name={focused ? "house.fill" : "house"} tintColor={color} size={22} />
             ) : (
-              <Feather name="home" size={22} color={color} />
+              <Feather name="home" size={21} color={color} />
             ),
         }}
       />
@@ -90,9 +94,9 @@ function ClassicTabLayout() {
           title: "Accounts",
           tabBarIcon: ({ color, focused }) =>
             isIOS ? (
-              <SymbolView name={focused ? "creditcard.fill" : "creditcard"} tintColor={color} size={24} />
+              <SymbolView name={focused ? "creditcard.fill" : "creditcard"} tintColor={color} size={22} />
             ) : (
-              <Feather name="credit-card" size={22} color={color} />
+              <Feather name="credit-card" size={21} color={color} />
             ),
         }}
       />
@@ -102,9 +106,21 @@ function ClassicTabLayout() {
           title: "Cards",
           tabBarIcon: ({ color, focused }) =>
             isIOS ? (
-              <SymbolView name={focused ? "wallet.pass.fill" : "wallet.pass"} tintColor={color} size={24} />
+              <SymbolView name={focused ? "wallet.pass.fill" : "wallet.pass"} tintColor={color} size={22} />
             ) : (
-              <Feather name="layers" size={22} color={color} />
+              <Feather name="layers" size={21} color={color} />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="numbers"
+        options={{
+          title: "Numbers",
+          tabBarIcon: ({ color, focused }) =>
+            isIOS ? (
+              <SymbolView name={focused ? "phone.fill" : "phone"} tintColor={color} size={22} />
+            ) : (
+              <Feather name="phone" size={21} color={color} />
             ),
         }}
       />
@@ -114,17 +130,15 @@ function ClassicTabLayout() {
           title: "History",
           tabBarIcon: ({ color, focused }) =>
             isIOS ? (
-              <SymbolView name={focused ? "list.bullet.rectangle.fill" : "list.bullet.rectangle"} tintColor={color} size={24} />
+              <SymbolView name={focused ? "list.bullet.rectangle.fill" : "list.bullet.rectangle"} tintColor={color} size={22} />
             ) : (
-              <Feather name="list" size={22} color={color} />
+              <Feather name="list" size={21} color={color} />
             ),
         }}
       />
       <Tabs.Screen
         name="send"
-        options={{
-          href: null,
-        }}
+        options={{ href: null }}
       />
       <Tabs.Screen
         name="profile"
@@ -132,9 +146,9 @@ function ClassicTabLayout() {
           title: "Profile",
           tabBarIcon: ({ color, focused }) =>
             isIOS ? (
-              <SymbolView name={focused ? "person.fill" : "person"} tintColor={color} size={24} />
+              <SymbolView name={focused ? "person.fill" : "person"} tintColor={color} size={22} />
             ) : (
-              <Feather name="user" size={22} color={color} />
+              <Feather name="user" size={21} color={color} />
             ),
         }}
       />

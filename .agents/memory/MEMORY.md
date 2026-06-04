@@ -1,1 +1,2 @@
 - [Nexus project setup](nexus-setup.md) — fintech Expo app with Express backend; JWT auth, Drizzle ORM, demo data seeded on signup
+- [Nexus Phone Number Hub](nexus-phone-hub.md) — phone numbers as financial identity; schema, API routes, ThemeContext, new tab screens

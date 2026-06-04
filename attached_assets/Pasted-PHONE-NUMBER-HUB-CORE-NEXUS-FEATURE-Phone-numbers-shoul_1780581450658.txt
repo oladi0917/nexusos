@@ -1,0 +1,1387 @@
+PHONE NUMBER HUB (CORE NEXUS FEATURE)
+
+
+
+Phone numbers should be treated as a major financial identity layer within Nexus, alongside:
+
+
+
+Bank Accounts
+
+Cards
+
+Nexus Wallet
+
+
+
+Phone numbers are not just profile information.
+
+
+
+They should be visible and manageable throughout the platform.
+
+
+
+LINKED PHONE NUMBERS PAGE
+
+
+
+Create a dedicated page called:
+
+
+
+Linked Numbers
+
+
+
+Display all linked phone numbers.
+
+
+
+Example:
+
+
+
+Primary Number
+
+
+
+07049410779
+
+Verified
+
+Default
+
+
+
+Secondary Numbers
+
+
+
+08012345678
+
+Verified
+
+
+
+08198765432
+
+Verified
+
+
+
+Actions:
+
+
+
+Add Number
+
+Remove Number
+
+Set Default Number
+
+Rename Number
+
+View Activity
+
+LINK PHONE NUMBER FLOW
+
+Step 1
+
+
+
+Enter phone number
+
+
+
+Step 2
+
+
+
+OTP verification
+
+
+
+Step 3
+
+
+
+Verification success
+
+
+
+Step 4
+
+
+
+Number appears in linked numbers list
+
+
+
+DASHBOARD INTEGRATION
+
+
+
+below the horizontal financial sources carousel, include linked phone numbers and below that lnked cards
+
+
+
+Example:
+
+
+
+GTBank
+
+₦100,000
+
+
+
+Opay
+
+₦25,000
+
+
+
+Visa ****4581
+
+
+
+07049410779
+
+
+
+08012345678
+
+
+
+Nexus Wallet
+
+₦10,000
+
+
+
+All cards should be horizontally scrollable.
+
+
+
+PROFILE PAGE
+
+
+
+Show:
+
+
+
+Linked Accounts: 5
+
+
+
+Linked Cards: 2
+
+
+
+Linked Numbers: 3
+
+
+
+Include a dedicated section:
+
+
+
+Phone Numbers
+
+
+
+Display all linked numbers.
+
+
+
+SEND MONEY INTEGRATION
+
+
+
+When selecting a recipient, users should be able to choose:
+
+
+
+Transfer To Self
+
+
+
+Show:
+
+
+
+Linked Accounts
+
+Linked Cards
+
+Linked Numbers
+
+Nexus Wallet
+
+Beneficiary
+
+
+
+Show saved beneficiaries.
+
+
+
+Third Party
+
+
+
+Search by:
+
+
+
+Account Number
+
+Phone Number
+
+Beneficiary Name
+
+PHONE NUMBER DROPDOWN
+
+
+
+Whenever a dropdown is shown for destination selection, include:
+
+
+
+My Accounts
+
+
+
+GTBank
+
+Opay
+
+Kuda
+
+
+
+My Cards
+
+
+
+Visa ****4581
+
+Mastercard ****1923
+
+
+
+My Numbers
+
+
+
+07049410779
+
+08012345678
+
+
+
+Nexus Wallet
+
+FUTURE PHONE PAYMENTS
+
+
+
+Design the architecture so that future versions of Nexus can support:
+
+
+
+Send Money to Phone Number
+
+Request Money by Phone Number
+
+Phone Number Discovery
+
+Nexus User Lookup by Phone Number
+
+
+
+without requiring major redesign.
+
+
+
+BOTTOM NAVIGATION UPDATE
+
+
+
+If space permits, add:
+
+
+
+Home
+
+Accounts
+
+Cards
+
+Numbers
+
+Transactions
+
+Profile
+
+
+
+Otherwise place Numbers under Accounts while keeping a dedicated Numbers page.
+
+
+
+NEXUS ECOSYSTEM SUMMARY
+
+
+
+The homepage should immediately communicate that Nexus unifies:
+
+
+
+Bank Accounts
+
+Cards
+
+Phone.  NEXUS SETTLEMENT MODEL
+
+
+
+Nexus should use a hidden settlement layer.
+
+
+
+The user experience must remain simple.
+
+
+
+Users should never be required to:
+
+
+
+Move money manually to wallet first
+
+Fund wallet before every transfer
+
+Perform multiple approvals
+
+Switch between banks
+
+TRANSFER EXECUTION FLOW
+
+
+
+When a transfer is initiated:
+
+
+
+Step 1
+
+
+
+User selects recipient.
+
+
+
+Step 2
+
+
+
+User enters amount.
+
+
+
+Example:
+
+
+
+₦50,000
+
+Step 3
+
+
+
+User selects funding sources.
+
+
+
+Example:
+
+
+
+GTBank         ₦20,000
+
+Opay           ₦15,000
+
+Visa Card      ₦10,000
+
+Wallet          ₦5,000
+
+Step 4
+
+
+
+User confirms.
+
+
+
+Step 5
+
+
+
+User enters Nexus PIN.
+
+
+
+Step 6
+
+
+
+Nexus processes transaction.
+
+
+
+Behind the scenes:
+
+
+
+GTBank Debit
+
+Opay Debit
+
+Visa Debit
+
+Wallet Debit
+
+
+
+↓
+
+
+
+Nexus Settlement Layer
+
+
+
+↓
+
+
+
+Recipient Credit
+
+
+
+The settlement process should be invisible to users.
+
+
+
+USER INTERFACE RULE
+
+
+
+Never show:
+
+
+
+Move To Wallet
+
+Fund Wallet First
+
+Transfer To Wallet
+
+
+
+during a normal transfer flow.
+
+
+
+The wallet aggregation process is internal.
+
+
+
+CARD FUNDING FLOW
+
+
+
+Cards should not behave like bank accounts.
+
+
+
+Cards are funding instruments.
+
+
+
+Users can:
+
+
+
+Use Card as Transfer Funding Source
+
+
+
+Example:
+
+
+
+Visa ****4581
+
+
+
+Contribution:
+
+₦10,000
+
+
+
+Nexus debits the card and contributes the amount toward the transfer.
+
+
+
+Fund Nexus Wallet With Card
+
+
+
+Separate flow:
+
+
+
+Wallet
+
+
+
+↓
+
+
+
+Fund Wallet
+
+
+
+↓
+
+
+
+Select Card
+
+
+
+↓
+
+
+
+Enter Amount
+
+
+
+Example:
+
+
+
+Visa ****4581
+
+
+
+₦20,000
+
+
+
+Result:
+
+
+
+Card Debited
+
+
+
+↓
+
+
+
+Wallet Credited
+
+ACCOUNT FUNDING FLOW
+
+
+
+Bank accounts should support:
+
+
+
+Direct Contribution
+
+
+
+Example:
+
+
+
+GTBank
+
+
+
+Contribution:
+
+₦20,000
+
+
+
+without requiring the user to manually move funds first.
+
+
+
+TRANSFER TO SELF
+
+
+
+When user chooses:
+
+
+
+Transfer To Self
+
+
+
+Allow:
+
+
+
+GTBank → Opay
+
+
+
+GTBank → Wallet
+
+
+
+Wallet → GTBank
+
+
+
+Opay → Wallet
+
+
+
+Wallet → Card Settlement Funding (where supported)
+
+
+
+Show source and destination clearly.
+
+
+
+NEXUS TOTAL BALANCE
+
+
+
+Homepage should show:
+
+
+
+Nexus Balance
+
+
+
+which includes:
+
+
+
+All Linked Banks
+
++
+
+Nexus Wallet Balance
+
+
+
+Cards should be displayed as linked funding sources but should not automatically be added to the total balance unless real card balance data is available from an approved provider.
+
+
+
+FUNDING SOURCE SELECTION UI
+
+i
+
+Funding sources should be displayed as selectable chips/cards:
+
+
+
+✓ GTBank        ₦20,000
+
+
+
+✓ Opay          ₦15,000
+
+
+
+✓ Visa          ₦10,000
+
+
+
+✓ Wallet         ₦5,000
+
+
+
+User can manually allocate amounts to each source.
+
+
+
+A progress indicator should show:
+
+
+
+Amount Needed: ₦50,000
+
+
+
+Allocated: ₦50,000
+
+
+
+Ready To Send. NEXUS UI, SECURITY & SETTINGS ENHANCEMENT
+
+
+
+IMPORTANT:
+
+
+
+Analyze the existing Nexus MVP before making any changes.
+
+
+
+Preserve all working functionality.
+
+
+
+Do not rebuild pages unnecessarily.
+
+
+
+Do not break navigation, authentication, dashboard functionality, transfer flows, wallet functionality, linked accounts, cards, phone numbers, or existing UI components.
+
+
+
+Only improve and extend the current application.
+
+
+
+REMOVE NOTIFICATION BELL
+
+
+
+On the homepage/dashboard:
+
+
+
+Remove the notification bell icon currently displayed in the top-right corner.
+
+
+
+Replace the empty space with one of the following:
+
+
+
+Nexus logo
+
+User avatar
+
+Clean spacing
+
+
+
+The top navigation should look cleaner and more premium.
+
+
+
+Do not leave an awkward gap.
+
+
+
+LIGHT MODE SUPPORT
+
+
+
+Add a Theme section in:
+
+
+
+Profile
+
+→
+
+Settings
+
+
+
+Create:
+
+
+
+Appearance
+
+
+
+Options:
+
+
+
+System Default
+
+
+
+Light Mode
+
+
+
+Dark Mode
+
+DARK MODE
+
+
+
+Use existing Nexus styling:
+
+
+
+Black Background
+
+Gold Accents
+
+Glassmorphism
+
+LIGHT MODE
+
+
+
+Create a luxury light theme.
+
+
+
+Colors:
+
+
+
+Background:
+
+#F8F9FA
+
+
+
+Cards:
+
+#FFFFFF
+
+
+
+Primary Gold:
+
+#D4AF37
+
+
+
+Text:
+
+#111111
+
+
+
+Maintain the premium Nexus aesthetic.
+
+
+
+THEME PERSISTENCE
+
+
+
+Theme selection should:
+
+
+
+Save automatically
+
+Persist across app restarts
+
+Apply globally
+
+ABOUT NEXUS PAGE
+
+
+
+Create a fully functional page:
+
+
+
+Profile
+
+→
+
+About Nexus
+
+About Nexus Content
+
+What is Nexus?
+
+
+
+Nexus is a financial control platform designed to help users connect accounts, manage finances, track activity, and move money from a single interface.
+
+
+
+Mission
+
+
+
+To simplify financial management by bringing all financial sources into one place.
+
+
+
+Vision
+
+
+
+To become the leading unified finance platform that allows users to see, manage, and move all their money from one secure ecosystem.
+
+
+
+Version Information
+
+
+
+Display:
+
+
+
+Nexus Version
+
+Build Number
+
+Release Date
+
+Legal Links
+
+
+
+Add:
+
+
+
+Terms of Service
+
+Privacy Policy
+
+Licenses
+
+HELP & SUPPORT PAGE
+
+
+
+Create a fully functional page:
+
+
+
+Profile
+
+→
+
+Help & Support
+
+Help Center
+
+
+
+Sections:
+
+
+
+Frequently Asked Questions
+
+
+
+Examples:
+
+
+
+How do I link an account?
+
+How do I add a card?
+
+How do I transfer money?
+
+How do I reset my PIN?
+
+How do I update my profile?
+
+Contact Support
+
+
+
+Options:
+
+
+
+Email Support
+
+Live Chat (placeholder)
+
+Call Support (placeholder)
+
+Report A Problem
+
+
+
+Create a simple support form.
+
+
+
+Fields:
+
+
+
+Subject
+
+Description
+
+Attachment (optional)
+
+
+
+Button:
+
+
+
+Submit Ticket
+
+SECURITY PAGE ENHANCEMENTS
+
+
+
+Inside:
+
+
+
+Profile
+
+→
+
+Security
+
+
+
+Create a complete security center.
+
+
+
+NEXUS PIN MANAGEMENT
+
+
+
+Users must be able to create and manage a Nexus PIN.
+
+
+
+Create PIN
+
+
+
+If user has no PIN:
+
+
+
+Show:
+
+
+
+Create Nexus PIN
+
+
+
+Requirements:
+
+
+
+4–6 digits
+
+Confirmation required
+
+Change PIN
+
+
+
+Flow:
+
+
+
+Current PIN
+
+
+
+↓
+
+
+
+New PIN
+
+
+
+↓
+
+
+
+Confirm New PIN
+
+Reset PIN
+
+
+
+Flow:
+
+
+
+Email Verification
+
+
+
+or
+
+
+
+OTP Verification
+
+
+
+↓
+
+
+
+Create New PIN
+
+BIOMETRIC SETTINGS
+
+
+
+Add:
+
+
+
+Use Fingerprint
+
+
+
+Use Face ID
+
+
+
+(Enable where device support exists.)
+
+
+
+LOGIN SECURITY
+
+
+
+Display:
+
+
+
+Last Login
+
+
+
+Last Device Used
+
+
+
+Active Sessions
+
+
+
+Allow:
+
+
+
+Log Out Other Devices
+
+SECURITY PREFERENCES
+
+
+
+Toggles:
+
+
+
+Transaction Alerts
+
+
+
+Login Alerts
+
+
+
+Security Notifications
+
+
+
+Device Recognition
+
+LINKED NUMBERS PAGE
+
+
+
+Create a dedicated page:
+
+
+
+Profile
+
+→
+
+Linked Numbers
+
+
+
+Display:
+
+
+
+Primary Number
+
+07049410779
+
+Verified
+
+Default
+
+Secondary Numbers
+
+08012345678
+
+Verified
+
+
+
+08198765432
+
+Verified
+
+
+
+Actions:
+
+
+
+Add Number
+
+Remove Number
+
+Set Default Number
+
+Rename Number
+
+View Activity
+
+DASHBOARD INTEGRATION
+
+
+
+The homepage should clearly display:
+
+
+
+Linked Accounts
+
+Linked Cards
+
+Linked Numbers
+
+Nexus Wallet
+
+
+
+inside the horizontal financial sources carousel.
+
+
+
+Examples:
+
+
+
+GTBank
+
+₦100,000
+
+
+
+Opay
+
+₦25,000
+
+
+
+Visa ****4581
+
+
+
+Mastercard ****1923
+
+
+
+07049410779
+
+
+
+08012345678
+
+
+
+Nexus Wallet
+
+₦10,000
+
+
+
+All cards should:
+
+
+
+Be horizontally scrollable
+
+Match Nexus black-and-gold styling
+
+Open detailed views when tapped
+
+FINAL GOAL
+
+
+
+The Nexus app should feel like a complete premium fintech platform with:
+
+
+
+Unified accounts
+
+Unified cards
+
+Unified phone numbers
+
+Nexus Wallet
+
+Multi-source transfers
+
+One Nexus PIN
+
+Dark Mode
+
+Light Mode
+
+Security Center
+
+About Nexus
+
+Help & Support
+
+Linked Numbers Management
+
+
+
+while preserving all existing MVP functionality and maintaining a polished, luxury user experience.

@@ -26,6 +26,14 @@ import type { NexusCard, NexusWallet } from "@/lib/apiClient";
 
 const BASE_URL = `https://${process.env.EXPO_PUBLIC_DOMAIN}`;
 
+interface PhoneNumber {
+  id: number;
+  number: string;
+  label: string | null;
+  isDefault: boolean;
+  isVerified: boolean;
+}
+
 function formatBalance(n: number): string {
   return n.toLocaleString("en-NG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -33,11 +41,9 @@ function formatBalance(n: number): string {
 const QUICK_ACTIONS = [
   { label: "Send", icon: "send" as const, route: "/(tabs)/send" },
   { label: "Cards", icon: "layers" as const, route: "/(tabs)/cards" },
+  { label: "Numbers", icon: "phone" as const, route: "/(tabs)/numbers" },
   { label: "History", icon: "list" as const, route: "/(tabs)/transactions" },
-  { label: "Add", icon: "plus-circle" as const, route: "/accounts/add" },
 ];
-
-/* ─── Carousel item components ─────────────────────────────────── */
 
 function AccountSourceItem({ bankName, bankColor, balance, currency, onPress }: {
   bankName: string; bankColor: string; balance: number; currency: string; onPress: () => void;
@@ -84,7 +90,25 @@ function CardSourceItem({ card, onPress }: { card: NexusCard; onPress: () => voi
   );
 }
 
-/* ─── Main screen ───────────────────────────────────────────────── */
+function PhoneSourceItem({ number, isDefault, onPress }: { number: string; isDefault: boolean; onPress: () => void }) {
+  return (
+    <Pressable onPress={onPress} style={({ pressed }) => [carouselStyles.item, carouselStyles.phoneItem, { opacity: pressed ? 0.8 : 1 }]}>
+      <View style={carouselStyles.phoneRing} />
+      <View style={[carouselStyles.iconCircle, { backgroundColor: "#1A0A2E" }]}>
+        <Feather name="phone" size={16} color="#A78BFA" />
+      </View>
+      <Text style={[carouselStyles.itemLabel, { color: "#A78BFA" }]} numberOfLines={1}>
+        {isDefault ? "Primary" : "Linked"}
+      </Text>
+      <Text style={[carouselStyles.itemBalance, { color: "#FFF", fontSize: 12, letterSpacing: 0 }]} numberOfLines={1}>
+        {number}
+      </Text>
+      {isDefault && (
+        <Text style={[carouselStyles.itemCurrency, { color: "#A78BFA" }]}>Default</Text>
+      )}
+    </Pressable>
+  );
+}
 
 export default function DashboardScreen() {
   const insets = useSafeAreaInsets();
@@ -118,18 +142,32 @@ export default function DashboardScreen() {
     enabled: !!token,
   });
 
-  const totalSources = accounts.length + cards.length + 1; // +1 for wallet
+  const { data: phoneNumbers = [] } = useQuery<PhoneNumber[]>({
+    queryKey: ["phone-numbers"],
+    queryFn: async () => {
+      const res = await fetch(`${BASE_URL}/api/phone-numbers`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return res.ok ? res.json() : [];
+    },
+    enabled: !!token,
+  });
+
+  const totalSources = accounts.length + cards.length + phoneNumbers.length + 1;
+
+  const initials = user
+    ? `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase()
+    : "U";
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      {/* ── Header ── */}
       <View style={[styles.header, { paddingTop: topPad + 12 }]}>
         <NexusLogo size="xs" showWordmark />
         <Pressable
-          style={[styles.bellBtn, { backgroundColor: colors.card, borderColor: colors.border }]}
+          style={[styles.avatarBtn, { backgroundColor: colors.gold }]}
           onPress={() => router.push("/(tabs)/profile")}
         >
-          <Feather name="bell" size={18} color={colors.foreground} />
+          <Text style={styles.avatarBtnText}>{initials}</Text>
         </Pressable>
       </View>
 
@@ -144,13 +182,13 @@ export default function DashboardScreen() {
               await qc.invalidateQueries({ queryKey: getGetDashboardQueryKey() });
               await qc.invalidateQueries({ queryKey: ["cards"] });
               await qc.invalidateQueries({ queryKey: ["wallet"] });
+              await qc.invalidateQueries({ queryKey: ["phone-numbers"] });
               await refetch();
             }}
             tintColor={colors.gold}
           />
         }
       >
-        {/* ── Greeting ── */}
         <View style={styles.greeting}>
           <Text style={[styles.greetSub, { color: colors.mutedForeground }]}>Good day,</Text>
           <Text style={[styles.greetName, { color: colors.foreground }]}>
@@ -158,14 +196,11 @@ export default function DashboardScreen() {
           </Text>
         </View>
 
-        {/* ── Nexus Balance card ── */}
         <View style={[styles.balanceCard, { backgroundColor: "#0D0D00", borderColor: "#2A2510" }]}>
           <View style={styles.waveRing1} />
           <View style={styles.waveRing2} />
           <View style={styles.waveRing3} />
-
           <Text style={styles.balanceLabel}>NEXUS BALANCE</Text>
-
           {isLoading ? (
             <ActivityIndicator color="#D4AF37" style={{ marginVertical: 12 }} />
           ) : (
@@ -173,8 +208,6 @@ export default function DashboardScreen() {
               ₦{formatBalance((dashboard?.totalBalance ?? 0) + (wallet?.balance ?? 0))}
             </Text>
           )}
-
-          {/* Breakdown row */}
           <View style={styles.balanceBreakdown}>
             <View style={styles.breakdownItem}>
               <View style={[styles.breakdownDot, { backgroundColor: "#10B981" }]} />
@@ -192,7 +225,6 @@ export default function DashboardScreen() {
               </Text>
             </View>
           </View>
-
           <View style={styles.balanceFooter}>
             <Text style={[styles.balanceAccounts, { color: "rgba(255,255,255,0.45)" }]}>
               {totalSources} financial source{totalSources !== 1 ? "s" : ""}
@@ -201,11 +233,9 @@ export default function DashboardScreen() {
               <Text style={styles.ngnText}>NGN</Text>
             </View>
           </View>
-
           <View style={styles.balanceGlow} />
         </View>
 
-        {/* ── Quick Actions ── */}
         <View style={styles.quickRow}>
           {QUICK_ACTIONS.map((action) => (
             <Pressable
@@ -224,7 +254,6 @@ export default function DashboardScreen() {
           ))}
         </View>
 
-        {/* ── My Financial Sources Carousel ── */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={[styles.sectionTitle, { color: colors.foreground }]}>My Financial Sources</Text>
@@ -232,14 +261,12 @@ export default function DashboardScreen() {
               <Text style={[styles.seeAll, { color: colors.gold }]}>Manage</Text>
             </Pressable>
           </View>
-
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={[carouselStyles.carouselContent, { paddingHorizontal: 0 }]}
             style={carouselStyles.carousel}
           >
-            {/* Bank accounts */}
             {accounts.map((account) => (
               <AccountSourceItem
                 key={account.id}
@@ -250,14 +277,7 @@ export default function DashboardScreen() {
                 onPress={() => router.push("/(tabs)/accounts")}
               />
             ))}
-
-            {/* Nexus Wallet */}
-            <WalletSourceItem
-              balance={wallet?.balance ?? 0}
-              onPress={() => {}}
-            />
-
-            {/* Cards */}
+            <WalletSourceItem balance={wallet?.balance ?? 0} onPress={() => {}} />
             {cards.map((card) => (
               <CardSourceItem
                 key={card.id}
@@ -265,8 +285,14 @@ export default function DashboardScreen() {
                 onPress={() => router.push("/(tabs)/cards" as any)}
               />
             ))}
-
-            {/* Add source */}
+            {phoneNumbers.map((phone) => (
+              <PhoneSourceItem
+                key={phone.id}
+                number={phone.number}
+                isDefault={phone.isDefault}
+                onPress={() => router.push("/(tabs)/numbers")}
+              />
+            ))}
             <Pressable
               style={({ pressed }) => [carouselStyles.addItem, { borderColor: colors.border, opacity: pressed ? 0.7 : 1 }]}
               onPress={() => router.push("/accounts/add")}
@@ -277,7 +303,6 @@ export default function DashboardScreen() {
           </ScrollView>
         </View>
 
-        {/* ── Recent Activity ── */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={[styles.sectionTitle, { color: colors.foreground }]}>Recent Activity</Text>
@@ -285,7 +310,6 @@ export default function DashboardScreen() {
               <Text style={[styles.seeAll, { color: colors.gold }]}>See all</Text>
             </Pressable>
           </View>
-
           {isLoading ? (
             <ActivityIndicator color={colors.gold} style={{ marginTop: 24 }} />
           ) : !dashboard?.recentTransactions?.length ? (
@@ -311,10 +335,10 @@ export default function DashboardScreen() {
           )}
         </View>
 
-        {/* ── Security card ── */}
         <View style={styles.section}>
           <Pressable
             style={[styles.securityCard, { backgroundColor: colors.card, borderColor: colors.border }]}
+            onPress={() => router.push("/profile/security")}
           >
             <View style={[styles.securityIcon, { backgroundColor: colors.goldLight }]}>
               <Feather name="shield" size={22} color={colors.gold} />
@@ -335,8 +359,6 @@ export default function DashboardScreen() {
   );
 }
 
-/* ─── Carousel styles ───────────────────────────────────────────── */
-
 const carouselStyles = StyleSheet.create({
   carousel: { marginLeft: -4 },
   carouselContent: { gap: 10, paddingRight: 20 },
@@ -350,95 +372,52 @@ const carouselStyles = StyleSheet.create({
     gap: 6,
     overflow: "hidden",
   },
-  walletItem: {
-    backgroundColor: "#0E0E00",
-    borderColor: "#2A2510",
-  },
+  walletItem: { backgroundColor: "#0E0E00", borderColor: "#2A2510" },
+  phoneItem: { backgroundColor: "#0D0A1E", borderColor: "#2A1A4E" },
   walletRing: {
-    position: "absolute",
-    top: -20,
-    right: -20,
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    borderWidth: 16,
-    borderColor: "rgba(212,175,55,0.1)",
+    position: "absolute", top: -20, right: -20,
+    width: 80, height: 80, borderRadius: 40,
+    borderWidth: 16, borderColor: "rgba(212,175,55,0.1)",
+  },
+  phoneRing: {
+    position: "absolute", top: -20, right: -20,
+    width: 80, height: 80, borderRadius: 40,
+    borderWidth: 16, borderColor: "rgba(167,139,250,0.1)",
   },
   iconCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: "center",
-    justifyContent: "center",
+    width: 36, height: 36, borderRadius: 18,
+    alignItems: "center", justifyContent: "center",
   },
   iconText: { color: "#FFF", fontSize: 12, fontFamily: "Inter_700Bold" },
-  itemLabel: {
-    color: "#888888",
-    fontSize: 11,
-    fontFamily: "Inter_500Medium",
-    marginTop: 2,
-  },
-  itemBalance: {
-    color: "#FFFFFF",
-    fontSize: 13,
-    fontFamily: "Inter_700Bold",
-    letterSpacing: -0.3,
-  },
-  itemCurrency: {
-    color: "#555555",
-    fontSize: 10,
-    fontFamily: "Inter_400Regular",
-  },
+  itemLabel: { color: "#888888", fontSize: 11, fontFamily: "Inter_500Medium", marginTop: 2 },
+  itemBalance: { color: "#FFFFFF", fontSize: 13, fontFamily: "Inter_700Bold", letterSpacing: -0.3 },
+  itemCurrency: { color: "#555555", fontSize: 10, fontFamily: "Inter_400Regular" },
   addItem: {
-    width: 90,
-    borderRadius: 18,
-    borderWidth: 1.5,
-    borderStyle: "dashed",
-    padding: 14,
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 6,
+    width: 90, borderRadius: 18, borderWidth: 1.5, borderStyle: "dashed",
+    padding: 14, alignItems: "center", justifyContent: "center", gap: 6,
   },
   addItemText: { fontSize: 12, fontFamily: "Inter_500Medium" },
 });
 
-/* ─── Main styles ───────────────────────────────────────────────── */
-
 const styles = StyleSheet.create({
   root: { flex: 1 },
-
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingBottom: 20,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingHorizontal: 20, paddingBottom: 20,
   },
-  bellBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
+  avatarBtn: {
+    width: 38, height: 38, borderRadius: 19,
+    alignItems: "center", justifyContent: "center",
   },
-
+  avatarBtnText: { color: "#FFF", fontSize: 14, fontFamily: "Inter_700Bold" },
   scroll: { flex: 1 },
   scrollContent: { paddingBottom: 110 },
-
   greeting: { paddingHorizontal: 20, marginBottom: 20 },
   greetSub: { fontSize: 13, fontFamily: "Inter_400Regular", marginBottom: 3 },
   greetName: { fontSize: 22, fontFamily: "Inter_700Bold" },
-
-  /* Balance card */
   balanceCard: {
-    marginHorizontal: 20,
-    borderRadius: 20,
-    borderWidth: 1,
-    padding: 22,
-    paddingBottom: 20,
-    overflow: "hidden",
-    marginBottom: 20,
+    marginHorizontal: 20, borderRadius: 20, borderWidth: 1,
+    padding: 22, paddingBottom: 20, overflow: "hidden", marginBottom: 20,
   },
   waveRing1: {
     position: "absolute", top: "20%", right: -70,
@@ -455,80 +434,34 @@ const styles = StyleSheet.create({
     width: 240, height: 240, borderRadius: 120,
     borderWidth: 32, borderColor: "rgba(212,175,55,0.04)",
   },
-  balanceLabel: {
-    color: "#D4AF37",
-    fontSize: 11, fontFamily: "Inter_600SemiBold",
-    letterSpacing: 1.4, marginBottom: 10,
-  },
-  balanceAmount: {
-    color: "#FFFFFF",
-    fontSize: 36, fontFamily: "Inter_700Bold",
-    letterSpacing: -1.5, marginBottom: 14,
-  },
+  balanceLabel: { color: "#D4AF37", fontSize: 11, fontFamily: "Inter_600SemiBold", letterSpacing: 1.4, marginBottom: 10 },
+  balanceAmount: { color: "#FFFFFF", fontSize: 36, fontFamily: "Inter_700Bold", letterSpacing: -1.5, marginBottom: 14 },
   balanceBreakdown: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 14,
-    backgroundColor: "rgba(255,255,255,0.04)",
-    borderRadius: 10,
-    padding: 10,
+    flexDirection: "row", alignItems: "center", marginBottom: 14,
+    backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 10, padding: 10,
   },
   breakdownItem: { flex: 1, gap: 3 },
   breakdownDot: { width: 8, height: 8, borderRadius: 4 },
   breakdownLabel: { fontSize: 10, fontFamily: "Inter_400Regular" },
   breakdownValue: { fontSize: 13, fontFamily: "Inter_600SemiBold" },
   breakdownDivider: { width: 1, height: 36, backgroundColor: "rgba(255,255,255,0.08)", marginHorizontal: 12 },
-  balanceFooter: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+  balanceFooter: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
   balanceAccounts: { fontSize: 13, fontFamily: "Inter_400Regular" },
   ngn: { backgroundColor: "#2A2510", paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6 },
   ngnText: { color: "#D4AF37", fontSize: 12, fontFamily: "Inter_600SemiBold" },
-  balanceGlow: {
-    position: "absolute", bottom: 0, left: 0, right: 0,
-    height: 2, backgroundColor: "#D4AF37", opacity: 0.45,
-  },
-
-  /* Quick Actions */
+  balanceGlow: { position: "absolute", bottom: 0, left: 0, right: 0, height: 2, backgroundColor: "#D4AF37", opacity: 0.45 },
   quickRow: { flexDirection: "row", paddingHorizontal: 20, gap: 10, marginBottom: 28 },
-  quickBtn: {
-    flex: 1, borderRadius: 16, borderWidth: 1,
-    alignItems: "center", paddingVertical: 16, gap: 10,
-  },
-  quickIconWrap: {
-    width: 44, height: 44, borderRadius: 13,
-    alignItems: "center", justifyContent: "center",
-  },
+  quickBtn: { flex: 1, borderRadius: 16, borderWidth: 1, alignItems: "center", paddingVertical: 16, gap: 10 },
+  quickIconWrap: { width: 44, height: 44, borderRadius: 13, alignItems: "center", justifyContent: "center" },
   quickLabel: { fontSize: 12, fontFamily: "Inter_500Medium" },
-
-  /* Section */
   section: { paddingHorizontal: 20, marginBottom: 16 },
-  sectionHeader: {
-    flexDirection: "row", justifyContent: "space-between",
-    alignItems: "center", marginBottom: 14,
-  },
+  sectionHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 14 },
   sectionTitle: { fontSize: 17, fontFamily: "Inter_700Bold" },
   seeAll: { fontSize: 13, fontFamily: "Inter_600SemiBold" },
-
-  /* Empty */
-  empty: {
-    borderRadius: 14, borderWidth: 1,
-    alignItems: "center", justifyContent: "center",
-    padding: 36, gap: 10,
-  },
+  empty: { borderRadius: 14, borderWidth: 1, alignItems: "center", justifyContent: "center", padding: 36, gap: 10 },
   emptyText: { fontSize: 14, fontFamily: "Inter_400Regular" },
-
-  /* Security */
-  securityCard: {
-    flexDirection: "row", alignItems: "center",
-    borderRadius: 16, borderWidth: 1, padding: 16, gap: 14,
-  },
-  securityIcon: {
-    width: 46, height: 46, borderRadius: 13,
-    alignItems: "center", justifyContent: "center", flexShrink: 0,
-  },
+  securityCard: { flexDirection: "row", alignItems: "center", borderRadius: 16, borderWidth: 1, padding: 16, gap: 14 },
+  securityIcon: { width: 46, height: 46, borderRadius: 13, alignItems: "center", justifyContent: "center", flexShrink: 0 },
   securityText: { flex: 1 },
   securityTitle: { fontSize: 14, fontFamily: "Inter_600SemiBold", marginBottom: 4 },
   securitySub: { fontSize: 12, fontFamily: "Inter_400Regular", lineHeight: 17 },
