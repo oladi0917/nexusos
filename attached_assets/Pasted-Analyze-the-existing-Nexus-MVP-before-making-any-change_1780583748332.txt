@@ -1,0 +1,997 @@
+Analyze the existing Nexus MVP before making any changes.
+
+
+
+Preserve all existing functionality.
+
+
+
+Do NOT remove any working features.
+
+
+
+Do NOT break authentication, transfers, wallet functionality, linked accounts, cards, linked numbers, dashboard functionality, or navigation.
+
+
+
+Only enhance and extend the existing application.
+
+
+
+Maintain the existing Nexus luxury fintech design language.
+
+
+
+Use the current black-and-gold premium aesthetic.
+
+
+
+---
+
+
+
+# DASHBOARD BALANCE INTERACTION
+
+
+
+The Nexus Balance card on the homepage should become clickable.
+
+
+
+When tapped:
+
+
+
+Navigate to a new page called:
+
+
+
+Financial Sources
+
+
+
+---
+
+
+
+# FINANCIAL SOURCES PAGE
+
+
+
+Purpose:
+
+
+
+Provide a complete view of every financial source connected to Nexus.
+
+
+
+This page should be accessible by:
+
+
+
+- Tapping Nexus Balance
+
+- Finances tab in bottom navigation
+
+
+
+---
+
+
+
+# PAGE STRUCTURE
+
+
+
+Display financial sources in sections.
+
+
+
+Each section should be horizontally scrollable.
+
+
+
+---
+
+
+
+## SECTION 1 — ACCOUNTS
+
+
+
+Display all linked bank accounts first.
+
+
+
+Examples:
+
+
+
+GTBank
+
+₦100,000
+
+
+
+Opay
+
+₦25,000
+
+
+
+Kuda
+
+₦50,000
+
+
+
+PalmPay
+
+₦12,000
+
+
+
+Moniepoint
+
+₦8,500
+
+
+
+Allow tap interaction.
+
+
+
+Opening an account should show:
+
+
+
+- Account Name
+
+- Institution
+
+- Balance
+
+- Account Activity
+
+- Transfer Options
+
+
+
+---
+
+
+
+## SECTION 2 — CARDS
+
+
+
+Below Accounts.
+
+
+
+Display:
+
+
+
+Visa ****4581
+
+
+
+Mastercard ****1923
+
+
+
+Verve ****8831
+
+
+
+Show:
+
+
+
+- Status
+
+- Last Used
+
+- Funding Capability
+
+
+
+Allow card details page.
+
+
+
+---
+
+
+
+## SECTION 3 — LINKED NUMBERS
+
+
+
+Below Cards.
+
+
+
+Display:
+
+
+
+07049410779
+
+
+
+08012345678
+
+
+
+08198765432
+
+
+
+Show:
+
+
+
+- Verified Status
+
+- Default Number
+
+- Activity
+
+
+
+Allow number management.
+
+
+
+---
+
+
+
+## SECTION 4 — NEXUS WALLET
+
+
+
+Display wallet separately.
+
+
+
+Show:
+
+
+
+Wallet Balance
+
+
+
+Recent Activity
+
+
+
+Quick Actions
+
+
+
+---
+
+
+
+# DASHBOARD CAROUSEL IMPROVEMENT
+
+
+
+Keep the existing homepage carousel.
+
+
+
+Improve it by showing:
+
+
+
+Accounts
+
+
+
+Cards
+
+
+
+Linked Numbers
+
+
+
+Wallet
+
+
+
+All horizontally scrollable.
+
+
+
+Tapping any item opens its details page.
+
+
+
+---
+
+
+
+# NEW BOTTOM NAVIGATION STRUCTURE
+
+
+
+IMPORTANT:
+
+
+
+The bottom navigation should become horizontally scrollable.
+
+
+
+The navigation must remain clean and organized.
+
+
+
+Initially display only 4 primary tabs.
+
+
+
+---
+
+
+
+## TAB 1
+
+
+
+Home
+
+
+
+Icon: Home
+
+
+
+---
+
+
+
+## TAB 2
+
+
+
+Finances
+
+
+
+Icon: Wallet / Bank
+
+
+
+Purpose:
+
+
+
+Access Financial Sources page.
+
+
+
+Includes:
+
+
+
+- Accounts
+
+- Cards
+
+- Linked Numbers
+
+- Wallet
+
+
+
+---
+
+
+
+## TAB 3
+
+
+
+Social Finance
+
+
+
+Icon: Users / Community
+
+
+
+Purpose:
+
+
+
+Community and collaborative financial features.
+
+
+
+---
+
+
+
+## TAB 4
+
+
+
+Profile
+
+
+
+Icon: User
+
+
+
+Purpose:
+
+
+
+Settings and account management.
+
+
+
+---
+
+
+
+# SCROLLABLE NAVIGATION
+
+
+
+Bottom navigation should support horizontal scrolling.
+
+
+
+Future tabs can be added without overcrowding the interface.
+
+
+
+Examples of future tabs:
+
+
+
+- Transactions
+
+- Investments
+
+- Credit
+
+- Rewards
+
+
+
+Design the navigation system to support expansion.
+
+
+
+---
+
+
+
+# SOCIAL FINANCE PAGE
+
+
+
+Create a dedicated page:
+
+
+
+Social Finance
+
+
+
+Accessible from bottom navigation.
+
+
+
+Purpose:
+
+
+
+Financial collaboration and social money management.
+
+
+
+---
+
+
+
+# SOCIAL FINANCE FEATURES
+
+
+
+Design the architecture for future growth.
+
+
+
+Create cards for:
+
+
+
+---
+
+
+
+## JOINT SAVINGS
+
+
+
+Users can create shared savings goals.
+
+
+
+Examples:
+
+
+
+Vacation Fund
+
+
+
+Family Savings
+
+
+
+Business Capital
+
+
+
+Emergency Fund
+
+
+
+Features:
+
+
+
+- Create Goal
+
+- Invite Members
+
+- Track Contributions
+
+- Contribution History
+
+
+
+---
+
+
+
+## OSUSU / AJO / THRIFT COLLECTION
+
+
+
+Traditional rotating savings groups.
+
+
+
+Users can:
+
+
+
+- Create Group
+
+- Join Group
+
+- Set Contribution Amount
+
+- Set Contribution Frequency
+
+- View Members
+
+- Track Payout Cycle
+
+
+
+Display:
+
+
+
+Group Name
+
+
+
+Members
+
+
+
+Contribution Amount
+
+
+
+Next Payout
+
+
+
+---
+
+
+
+## NEXUS FRIENDS
+
+
+
+Allow users to connect with other Nexus users.
+
+
+
+Search using:
+
+
+
+- Phone Number
+
+- Username
+
+- Email (future)
+
+
+
+Display:
+
+
+
+Suggested Friends
+
+
+
+Recent Connections
+
+
+
+Friend Requests
+
+
+
+---
+
+
+
+## INVITE FRIENDS TO NEXUS
+
+
+
+Users can invite contacts using:
+
+
+
+Phone Number
+
+
+
+Flow:
+
+
+
+Invite Friend
+
+
+
+↓
+
+
+
+Enter Number
+
+
+
+↓
+
+
+
+Send Invite
+
+
+
+↓
+
+
+
+Invitation Sent
+
+
+
+---
+
+
+
+## SOCIAL PAYMENTS ARCHITECTURE
+
+
+
+Prepare the system for future support of:
+
+
+
+- Send Money to Friends
+
+- Request Money
+
+- Split Bills
+
+- Group Contributions
+
+- Shared Wallets
+
+
+
+Do not fully implement payment execution yet.
+
+
+
+Create the UI and data architecture.
+
+
+
+---
+
+
+
+# FINANCES PAGE
+
+
+
+The Finances page should become the central financial hub.
+
+
+
+Display:
+
+
+
+---
+
+
+
+## TOTAL NEXUS BALANCE
+
+
+
+Combined balance from:
+
+
+
+Linked Accounts
+
+
+
+Nexus Wallet
+
+
+
+(Do not include card balances unless supported by provider)
+
+
+
+---
+
+
+
+## ACCOUNTS SECTION
+
+
+
+Horizontally scrollable.
+
+
+
+---
+
+
+
+## CARDS SECTION
+
+
+
+Horizontally scrollable.
+
+
+
+---
+
+
+
+## LINKED NUMBERS SECTION
+
+
+
+Horizontally scrollable.
+
+
+
+---
+
+
+
+## WALLET SECTION
+
+
+
+Display wallet separately.
+
+
+
+---
+
+
+
+## QUICK ACTIONS
+
+
+
+Transfer
+
+
+
+Fund Wallet
+
+
+
+Add Account
+
+
+
+Add Card
+
+
+
+Link Number
+
+
+
+---
+
+
+
+# USER EXPERIENCE GOAL
+
+
+
+A user should be able to:
+
+
+
+1. Open Nexus
+
+2. See total Nexus Balance
+
+3. Tap balance to view all financial sources
+
+4. View Accounts, Cards, Numbers, and Wallets in one place
+
+5. Access Social Finance features
+
+6. Create Joint Savings
+
+7. Create Osusu/Ajo groups
+
+8. Invite Friends using phone numbers
+
+9. Manage everything without leaving Nexus. BOTTOM NAVIGATION RESTRUCTURE (PRESERVE EXISTING NAVIGATION)
+
+
+
+IMPORTANT:
+
+
+
+Analyze the current bottom navigation before making changes.
+
+
+
+Do NOT remove any existing working pages.
+
+
+
+Do NOT remove existing navigation items unless they are duplicates.
+
+
+
+Preserve all current functionality.
+
+
+
+Current Rule
+
+
+
+Keep all existing tabs and pages functional.
+
+
+
+Only reorganize them into a cleaner, expandable navigation structure.
+
+
+
+Add New Tabs
+
+
+
+Add:
+
+
+
+Finances
+
+
+
+and
+
+
+
+Social Finance
+
+
+
+to the navigation system.
+
+
+
+Navigation Behavior
+
+
+
+The bottom navigation should become horizontally scrollable.
+
+
+
+This allows future expansion without overcrowding the UI.
+
+
+
+Example:
+
+
+
+Home
+
+Accounts
+
+Finances
+
+Transactions
+
+Social Finance
+
+Profile
+
+Cards
+
+Wallet
+
+
+
+Users can scroll horizontally if additional tabs exist.
+
+
+
+Priority Order
+
+
+
+The first visible tabs should be:
+
+
+
+Home
+
+Finances
+
+Transactions
+
+Social Finance
+
+
+
+Additional tabs remain accessible through horizontal scrolling.

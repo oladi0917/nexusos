@@ -196,10 +196,17 @@ export default function DashboardScreen() {
           </Text>
         </View>
 
-        <View style={[styles.balanceCard, { backgroundColor: "#0D0D00", borderColor: "#2A2510" }]}>
+        <Pressable
+          onPress={() => router.push("/(tabs)/finances")}
+          style={({ pressed }) => [styles.balanceCard, { backgroundColor: "#0D0D00", borderColor: "#2A2510", opacity: pressed ? 0.92 : 1 }]}
+        >
           <View style={styles.waveRing1} />
           <View style={styles.waveRing2} />
           <View style={styles.waveRing3} />
+          <View style={styles.balanceTapHint}>
+            <Feather name="chevrons-right" size={12} color="rgba(212,175,55,0.5)" />
+            <Text style={styles.balanceTapText}>Tap to view all sources</Text>
+          </View>
           <Text style={styles.balanceLabel}>NEXUS BALANCE</Text>
           {isLoading ? (
             <ActivityIndicator color="#D4AF37" style={{ marginVertical: 12 }} />
@@ -234,7 +241,7 @@ export default function DashboardScreen() {
             </View>
           </View>
           <View style={styles.balanceGlow} />
-        </View>
+        </Pressable>
 
         <View style={styles.quickRow}>
           {QUICK_ACTIONS.map((action) => (
@@ -449,6 +456,8 @@ const styles = StyleSheet.create({
   balanceAccounts: { fontSize: 13, fontFamily: "Inter_400Regular" },
   ngn: { backgroundColor: "#2A2510", paddingHorizontal: 10, paddingVertical: 4, borderRadius: 6 },
   ngnText: { color: "#D4AF37", fontSize: 12, fontFamily: "Inter_600SemiBold" },
+  balanceTapHint: { flexDirection: "row", alignItems: "center", gap: 4, marginBottom: 8 },
+  balanceTapText: { color: "rgba(212,175,55,0.5)", fontSize: 10, fontFamily: "Inter_400Regular" },
   balanceGlow: { position: "absolute", bottom: 0, left: 0, right: 0, height: 2, backgroundColor: "#D4AF37", opacity: 0.45 },
   quickRow: { flexDirection: "row", paddingHorizontal: 20, gap: 10, marginBottom: 28 },
   quickBtn: { flex: 1, borderRadius: 16, borderWidth: 1, alignItems: "center", paddingVertical: 16, gap: 10 },
