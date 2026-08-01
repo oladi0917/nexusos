@@ -50,3 +50,10 @@ description: Key decisions and gotchas for the Nexus fintech Expo + Express app
 - `expo-secure-store` must be `~15.0.8` for Expo SDK 54 (pnpm may install newer — pin in catalog if needed)
 
 **Why:** Newer expo-secure-store versions broke web bundling until pinned to SDK-matching version.
+
+## pnpm install — tar firewall fix
+- Replit's package firewall blocks all tar@7.x versions except the absolute latest (7.5.22)
+- Add `"pnpm": { "overrides": { "tar": "7.5.22" } }` to root `package.json` before running `pnpm install`
+- `@expo/cli@54.x` requires `tar@^7.5.2`; without the override the lockfile resolves to a blocked version
+
+**Why:** Replit package firewall blocks older tar 7.x versions; pinning to latest (7.5.22) passes the firewall.
