@@ -67,7 +67,7 @@ router.post("/phone-numbers/verify-otp", authenticate, async (req, res): Promise
 });
 
 router.delete("/phone-numbers/:id", authenticate, async (req, res): Promise<void> => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id as string);
   if (isNaN(id)) { res.status(400).json({ error: "Invalid ID" }); return; }
   const [deleted] = await db
     .delete(phoneNumbersTable)
@@ -90,7 +90,7 @@ router.delete("/phone-numbers/:id", authenticate, async (req, res): Promise<void
 });
 
 router.patch("/phone-numbers/:id/default", authenticate, async (req, res): Promise<void> => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id as string);
   if (isNaN(id)) { res.status(400).json({ error: "Invalid ID" }); return; }
   const target = await db
     .select()
@@ -108,7 +108,7 @@ router.patch("/phone-numbers/:id/default", authenticate, async (req, res): Promi
 });
 
 router.patch("/phone-numbers/:id/label", authenticate, async (req, res): Promise<void> => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id as string);
   const { label } = req.body;
   if (isNaN(id)) { res.status(400).json({ error: "Invalid ID" }); return; }
   const [updated] = await db

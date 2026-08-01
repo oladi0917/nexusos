@@ -155,7 +155,7 @@ function ClassicTabLayout() {
             tabBarIcon: ({ color, focused }) =>
               Platform.OS === "ios" && tab.sfDefault ? (
                 <SymbolView
-                  name={focused ? tab.sfFocused! : tab.sfDefault}
+                  name={(focused ? tab.sfFocused! : tab.sfDefault) as any}
                   tintColor={color}
                   size={22}
                 />

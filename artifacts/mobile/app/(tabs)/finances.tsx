@@ -115,10 +115,10 @@ function PaymentCard({ card }: { card: NexusCard }) {
           <Text style={styles.paymentCardLabel}>Expires</Text>
           <Text style={styles.paymentCardValue}>{card.expiresMonth}/{card.expiresYear}</Text>
         </View>
-        <View style={[styles.paymentCardStatus, { backgroundColor: card.status === "active" ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)" }]}>
-          <View style={[styles.statusDot, { backgroundColor: card.status === "active" ? "#10B981" : "#EF4444" }]} />
-          <Text style={[styles.statusText, { color: card.status === "active" ? "#10B981" : "#EF4444" }]}>
-            {card.status === "active" ? "Active" : "Inactive"}
+        <View style={[styles.paymentCardStatus, { backgroundColor: card.isActive ? "rgba(16,185,129,0.2)" : "rgba(239,68,68,0.2)" }]}>
+          <View style={[styles.statusDot, { backgroundColor: card.isActive ? "#10B981" : "#EF4444" }]} />
+          <Text style={[styles.statusText, { color: card.isActive ? "#10B981" : "#EF4444" }]}>
+            {card.isActive ? "Active" : "Inactive"}
           </Text>
         </View>
       </View>
