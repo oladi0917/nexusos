@@ -79,7 +79,7 @@ const illStyles = StyleSheet.create({
     height: 200,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "flex-end",
+    alignSelf: "center",
   },
   glowRing: {
     position: "absolute",
@@ -110,14 +110,14 @@ const illStyles = StyleSheet.create({
   },
   bankCardBack: {
     top: 10,
-    left: 10,
-    transform: [{ rotate: "-15deg" }],
+    left: 8,
+    transform: [{ rotate: "-14deg" }],
     backgroundColor: "#161616",
   },
   bankCardMid: {
-    top: 0,
-    right: 10,
-    transform: [{ rotate: "12deg" }],
+    top: 10,
+    right: 8,
+    transform: [{ rotate: "14deg" }],
     backgroundColor: "#1C1C1C",
   },
   bankCardChip: {
@@ -250,13 +250,11 @@ export default function WelcomeScreen() {
 
         {/* ── Hero ── */}
         <View style={styles.hero}>
-          <View style={styles.heroText}>
-            <Text style={styles.headline}>All Your Money.{"\n"}One Place.</Text>
-            <Text style={styles.heroSub}>
-              Connect your bank accounts, track transactions, and move money seamlessly from a single secure platform.
-            </Text>
-          </View>
+          <Text style={styles.headline}>{"All Your Money\nOne Place."}</Text>
           <WalletIllustration />
+          <Text style={styles.heroSub}>
+            Connect your bank accounts, track transactions, and move money seamlessly from a single secure platform.
+          </Text>
         </View>
 
         {/* ── Features ── */}
@@ -350,26 +348,24 @@ const styles = StyleSheet.create({
 
   // Hero
   hero: {
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     marginBottom: 36,
-    gap: 8,
+    gap: 16,
   },
-  heroText: { flex: 1 },
   headline: {
     color: "#FFFFFF",
-    fontSize: 34,
+    fontSize: 36,
     fontFamily: "Inter_700Bold",
-    lineHeight: 42,
-    marginBottom: 14,
-    letterSpacing: -0.5,
+    lineHeight: 44,
+    letterSpacing: -0.8,
+    textAlign: "center",
   },
   heroSub: {
     color: MUTED,
     fontSize: 14,
     fontFamily: "Inter_400Regular",
     lineHeight: 22,
+    textAlign: "center",
   },
 
   // Section title
