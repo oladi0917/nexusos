@@ -57,3 +57,8 @@ description: Key decisions and gotchas for the Nexus fintech Expo + Express app
 - `@expo/cli@54.x` requires `tar@^7.5.2`; without the override the lockfile resolves to a blocked version
 
 **Why:** Replit package firewall blocks older tar 7.x versions; pinning to latest (7.5.22) passes the firewall.
+
+## Artifact structure (current)
+- `artifacts/mobile` — Expo app, preview path `/`, port 18115
+- `artifacts/api-server` — Express API, preview path `/api`, port 8080
+- The bolt-export web app (nexus-web) was created then removed — only the mobile app remains as frontend
