@@ -1,0 +1,112 @@
+Here’s a polished prompt you can paste into Replit AI/Bolt/Cursor:
+
+1. Premium Nexus Loading Screen
+
+Create a premium loading overlay that appears:
+	•	During login/authentication.
+	•	Before navigating to important pages (Dashboard, Transfers, Analytics, Cards, etc.).
+	•	While waiting for API responses.
+
+Design
+	•	Cover the screen with a black overlay using approximately 70–80% opacity so the previous screen is subtly visible.
+	•	Place the Nexus logo in the exact center.
+	•	Surround it with a soft gold glow matching the app’s existing brand colors.
+	•	Add a faint animated circular ring around the logo.
+
+Animation
+
+The animation should feel luxurious and fintech-inspired, not playful.
+
+Animation sequence:
+	•	Logo gently scales from 95% → 105% → 100%.
+	•	Gold glow softly pulses.
+	•	Circular ring rotates slowly.
+	•	Tiny gold particles subtly orbit the logo.
+	•	Total animation loop: about 1.8–2 seconds.
+	•	Smooth ease-in-out motion.
+	•	No bouncing or flashy effects.
+
+Transition
+	•	Fade in within 200ms.
+	•	Fade out within 250ms once loading completes.
+	•	Prevent user interaction while visible.
+
+The loading animation should feel similar to Revolut, Apple Wallet, or Monzo—minimal, elegant, and premium.
+
+2. Multi-Source Payment Feature (Nexus Exclusive)
+
+Implement a feature called Split Payment that lets users fund a single transfer from multiple linked bank accounts, debit cards, or a combination of both.
+
+User Flow
+
+After entering:
+	•	Recipient
+	•	Amount
+
+Show a section titled:
+
+Pay From
+
+Display every linked funding source with:
+	•	Bank logo
+	•	Bank name
+	•	Masked account/card number
+	•	Available balance
+
+Each funding source should have:
+	•	Checkbox (select multiple)
+	•	Amount input field
+
+Example:
+
+Amount to send: ₦120,000
+
+✓ Access Bank …….. ₦50,000
+
+✓ GTBank …………. ₦40,000
+
+✓ Zenith Card …….. ₦30,000
+
+Total Selected: ₦120,000 ✓
+
+If the total doesn’t match the transfer amount:
+	•	Disable the Continue button.
+	•	Display how much remains or how much exceeds the amount.
+
+Smart Features
+	•	Auto-distribute the payment across selected accounts based on available balances (editable by the user).
+	•	Remember frequently used funding combinations.
+	•	Allow drag-and-drop to reorder funding sources.
+	•	Show remaining balance for each account after allocation.
+	•	Validate available balances before proceeding.
+	•	Show a clear breakdown on the confirmation page.
+
+Example:
+
+You’re sending ₦120,000 to John Doe
+
+Funding Breakdown:
+	•	Access Bank …….. ₦50,000
+	•	GTBank …………. ₦40,000
+	•	Zenith Card …….. ₦30,000
+
+Recipient receives:
+₦120,000
+
+Security
+	•	Require transaction PIN before submission.
+	•	Support biometric confirmation where enabled.
+	•	Show a processing animation using the Nexus loading screen while the transfer is being processed.
+
+UI Style
+
+Keep everything consistent with the existing Nexus design:
+	•	Black background
+	•	Gold accents
+	•	Rounded premium cards
+	•	Soft shadows
+	•	Smooth animations
+	•	Clean spacing
+	•	Mobile-first responsive layout
+
+The overall experience should make Split Payment feel like a flagship Nexus feature that differentiates the app from traditional banking apps.
