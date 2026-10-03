@@ -12,6 +12,7 @@ import Transactions from "./pages/Transactions";
 import TransactionDetail from "./pages/TransactionDetail";
 import Send from "./pages/Send";
 import Profile from "./pages/Profile";
+import Nexus from "./pages/Nexus";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { token, loading } = useAuth();
@@ -51,9 +52,10 @@ export default function App() {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/accounts" element={<ProtectedRoute><Accounts /></ProtectedRoute>} />
           <Route path="/accounts/add" element={<ProtectedRoute><AddAccount /></ProtectedRoute>} />
+          <Route path="/nexus" element={<ProtectedRoute><Nexus /></ProtectedRoute>} />
+          <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
           <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
           <Route path="/transactions/:id" element={<ProtectedRoute><TransactionDetail /></ProtectedRoute>} />
-          <Route path="/send" element={<ProtectedRoute><Send /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
           <Route path="*" element={<Navigate to="/" replace />} />

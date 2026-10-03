@@ -11,16 +11,23 @@ export default function Accounts() {
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [accountTypeFilter, setAccountTypeFilter] = useState<string>("all");
 
   const load = () => {
     setLoading(true);
     api
       .get<Account[]>("/accounts")
-      .then(setAccounts)
+      .then((accounts) => {
+        if (accountTypeFilter === "all") {
+          setAccounts(accounts);
+        } else {
+          setAccounts(accounts.filter((acc) => acc.accountType === accountTypeFilter));
+        }
+      })
       .finally(() => setLoading(false));
   };
 
-  useEffect(load, []);
+  useEffect(load, [accountTypeFilter]);
 
   const totalBalance = accounts.reduce((s, a) => s + a.balance, 0);
 
@@ -40,6 +47,70 @@ export default function Accounts() {
   return (
     <Layout title="Accounts">
       <div className="px-5 pb-6">
+        {/* Account type filters */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button
+            onClick={() => setAccountTypeFilter("all")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "all"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setAccountTypeFilter("checking")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "checking"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            Checking
+          </button>
+          <button
+            onClick={() => setAccountTypeFilter("savings")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "savings"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            Savings
+          </button>
+          <button
+            onClick={() => setAccountTypeFilter("credit")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "credit"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            Credit Card
+          </button>
+          <button
+            onClick={() => setAccountTypeFilter("loan")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "loan"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            Loan
+          </button>
+          <button
+            onClick={() => setAccountTypeFilter("investment")}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              accountTypeFilter === "investment"
+                ? "bg-gold text-white"
+                : "bg-card text-muted hover:bg-card/50"
+            }`}
+          >
+            Investment
+          </button>
+        </div>
+
         {/* Summary card */}
         <div
           className="rounded-2xl p-5 mt-4 mb-5"

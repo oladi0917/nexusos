@@ -24,6 +24,8 @@ router.get("/users/profile", async (req, res): Promise<void> => {
     phone: user.phone,
     bvn: user.bvn,
     address: user.address,
+    financialId: user.financial_id,
+    creditScore: user.credit_score,
     createdAt: user.createdAt,
   });
 });
@@ -52,6 +54,8 @@ router.patch("/users/profile", async (req, res): Promise<void> => {
     phone: user.phone,
     bvn: user.bvn,
     address: user.address,
+    financialId: user.financial_id,
+    creditScore: user.credit_score,
     createdAt: user.createdAt,
   });
 });

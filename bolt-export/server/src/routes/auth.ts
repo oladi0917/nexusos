@@ -30,6 +30,8 @@ router.post("/auth/signup", async (req, res): Promise<void> => {
   }
 
   const hashed = await hashPassword(password);
+  // Generate a unique financial ID
+  const financialId = `NX${Date.now()}${Math.floor(Math.random() * 10000)}`;
   const [user] = await db
     .insert(usersTable)
     .values({
@@ -38,6 +40,8 @@ router.post("/auth/signup", async (req, res): Promise<void> => {
       email: email.toLowerCase().trim(),
       password: hashed,
       phone: phone.trim(),
+      financial_id: financialId,
+      credit_score: null, // Initialize as null, to be updated later by credit scoring system
     })
     .returning();
 
@@ -99,6 +103,8 @@ router.post("/auth/login", async (req, res): Promise<void> => {
       lastName: user.lastName,
       email: user.email,
       phone: user.phone,
+      financialId: user.financial_id,
+      creditScore: user.credit_score,
       createdAt: user.createdAt,
     },
   });
@@ -126,6 +132,8 @@ router.get("/auth/me", authenticate, async (req, res): Promise<void> => {
     lastName: user.lastName,
     email: user.email,
     phone: user.phone,
+    financialId: user.financial_id,
+    creditScore: user.credit_score,
     createdAt: user.createdAt,
   });
 });

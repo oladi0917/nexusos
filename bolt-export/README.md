@@ -52,6 +52,24 @@ Sign up for a new account — demo data (2 bank accounts, 8 transactions) is see
 | Server   | Express, TypeScript, Drizzle ORM, PostgreSQL      |
 | Auth     | JWT (Bearer tokens, stored in localStorage)       |
 
+## New Features
+
+### Multi-source Payments (Split Funding)
+- Users can fund a single transaction from multiple source accounts
+- Allows splitting payments across accounts when one account has insufficient funds
+- Implemented in the Payments (/send) tab with step-by-step flow
+
+### Nexus/Social Finance (Social Layer)
+- Users can mark transactions as shared to appear in the Nexus tab feed
+- Shared transactions are visible to the user in their social feed
+- Implemented in the Nexus tab with sharing capabilities
+
+### Accounts Integration Enhancement
+- Accounts now have types (Checking, Savings, Credit Card, Loan, Investment)
+- Accounts can have optional subtypes for more specific categorization
+- Account type badges are displayed in the Accounts tab
+- Filter accounts by type at the top of the Accounts tab
+
 ## API Endpoints
 
 | Method | Path                     | Auth | Description                  |
@@ -65,6 +83,8 @@ Sign up for a new account — demo data (2 bank accounts, 8 transactions) is see
 | DELETE | /api/accounts/:id        | Yes  | Remove account               |
 | GET    | /api/transactions        | Yes  | List transactions             |
 | GET    | /api/transactions/:id    | Yes  | Transaction detail           |
+| GET    | /api/transactions/shared | Yes  | List shared transactions     |
+| PATCH  | /api/transactions/:id/toggle-share | Yes  | Toggle transaction share status |
 | POST   | /api/transfers/resolve   | Yes  | Resolve account number       |
 | POST   | /api/transfers           | Yes  | Send money                   |
 | GET    | /api/users/profile       | Yes  | User profile                 |

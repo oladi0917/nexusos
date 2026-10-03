@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowDownLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowDownLeft, ArrowUpRight, Loader2, Share2 } from "lucide-react";
 import { api, type Transaction } from "../lib/api";
 import { formatBalance, formatDate, formatTime } from "../lib/utils";
 
@@ -19,6 +19,7 @@ export default function TransactionDetail() {
   const [tx, setTx] = useState<Transaction | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [sharingLoading, setSharingLoading] = useState(false);
 
   useEffect(() => {
     api
@@ -52,14 +53,60 @@ export default function TransactionDetail() {
   return (
     <div className="min-h-screen bg-bg flex flex-col max-w-md mx-auto">
       {/* Header */}
-      <div className="flex items-center gap-4 px-5 pt-10 pb-4">
+      <div className="flex items-center justify-between px-5 pt-10 pb-4">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => navigate(-1)}
+            className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center hover:border-gold/40 transition-colors"
+          >
+            <ArrowLeft size={18} className="text-fg" />
+          </button>
+          <h1 className="text-fg font-bold text-xl">Transaction</h1>
+        </div>
         <button
-          onClick={() => navigate(-1)}
+          onClick={async () => {
+            setSharingLoading(true);
+            // Optimistically update the shared status
+            setTx(prevTx => {
+              if (!prevTx) return prevTx;
+              return { ...prevTx, isShared: !prevTx.isShared };
+            });
+            try {
+              await api.patch(`/transactions/${id}/toggle-share`);
+              // If successful, the optimistic update is already applied
+              // We'll still fetch to ensure consistency with server state
+              const updatedTx = await api.get<Transaction>(`/transactions/${id}`);
+              setTx(updatedTx);
+            } catch (err: any) {
+              // Rollback the optimistic update on error
+              setTx(prevTx => {
+                if (!prevTx) return prevTx;
+                return { ...prevTx, isShared: !prevTx.isShared };
+              });
+              setError(
+                err.response?.data?.error ||
+                  err.message ||
+                  "Failed to update share status"
+              );
+            } finally {
+              setSharingLoading(false);
+            }
+          }}
           className="w-10 h-10 rounded-xl bg-card border border-border flex items-center justify-center hover:border-gold/40 transition-colors"
+          disabled={sharingLoading}
         >
-          <ArrowLeft size={18} className="text-fg" />
+          {sharingLoading ? (
+            <Loader2 size={18} className="animate-spin" />
+          ) : (
+            <>
+              {tx?.isShared ? (
+                <Share2 size={18} className="text-gold" />
+              ) : (
+                <Share2 size={18} className="text-muted" />
+              )}
+            </>
+          )}
         </button>
-        <h1 className="text-fg font-bold text-xl">Transaction</h1>
       </div>
 
       {/* Amount display */}
@@ -100,6 +147,7 @@ export default function TransactionDetail() {
         {tx.note && <Row label="Note" value={tx.note} />}
         <Row label="Date" value={formatDate(tx.createdAt)} />
         <Row label="Time" value={formatTime(tx.createdAt)} />
+        <Row label="Shared" value={tx.isShared ? "Yes" : "No"} />
         <Row label="Reference" value={`TXN${String(tx.id).padStart(8, "0")}`} />
       </div>
     </div>

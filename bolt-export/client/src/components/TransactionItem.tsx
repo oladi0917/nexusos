@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDownLeft, ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, ChevronRight, Share2 } from "lucide-react";
 import { formatBalance, formatDate } from "../lib/utils";
 import type { Transaction } from "../lib/api";
 
@@ -28,6 +28,9 @@ export function TransactionItem({ tx, onClick }: TransactionItemProps) {
           <ArrowDownLeft size={18} className="text-green" />
         ) : (
           <ArrowUpRight size={18} className="text-red" />
+        )}
+        {tx.isShared && (
+          <Share2 size={14} className="text-gold" />
         )}
       </div>
 

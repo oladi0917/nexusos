@@ -57,6 +57,11 @@ export function AccountCard({
             >
               {account.bankName}
             </span>
+            {account.accountType && account.accountType !== "checking" && (
+              <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-gold-light text-gold text-xs font-semibold flex-shrink-0">
+                {account.accountType.charAt(0).toUpperCase() + account.accountType.slice(1)}
+              </span>
+            )}
             {isPrimary && (
               <span className="flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-gold-light text-gold text-xs font-semibold flex-shrink-0">
                 <Star size={10} fill="#C9A84C" />

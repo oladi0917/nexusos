@@ -11,6 +11,8 @@ export default function AddAccount() {
     accountNumber: "",
     accountName: "",
     balance: "",
+    accountType: "checking",
+    accountSubtype: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -33,6 +35,8 @@ export default function AddAccount() {
         accountNumber: form.accountNumber,
         accountName: form.accountName,
         balance: parseFloat(form.balance),
+        accountType: form.accountType,
+        accountSubtype: form.accountSubtype || null,
       });
       navigate("/accounts", { replace: true });
     } catch (err) {
@@ -71,6 +75,34 @@ export default function AddAccount() {
               </option>
             ))}
           </select>
+        </div>
+
+        {/* Account type */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-fg text-sm font-medium">Account Type</label>
+          <select
+            value={form.accountType}
+            onChange={(e) => setForm((f) => ({ ...f, accountType: e.target.value }))}
+            className="h-14 px-4 rounded-xl bg-card border border-border text-fg focus:outline-none focus:border-gold transition-colors text-sm appearance-none"
+          >
+            <option value="checking">Checking</option>
+            <option value="savings">Savings</option>
+            <option value="credit">Credit Card</option>
+            <option value="loan">Loan</option>
+            <option value="investment">Investment</option>
+          </select>
+        </div>
+
+        {/* Account subtype */}
+        <div className="flex flex-col gap-1.5">
+          <label className="text-fg text-sm font-medium">Account Subtype (optional)</label>
+          <input
+            type="text"
+            value={form.accountSubtype}
+            onChange={(e) => setForm((f) => ({ ...f, accountSubtype: e.target.value }))}
+            placeholder="e.g., High Yield, Visa Gold"
+            className="h-14 px-4 rounded-xl bg-card border border-border text-fg placeholder-muted focus:outline-none focus:border-gold transition-colors text-sm"
+          />
         </div>
 
         {/* Account number */}

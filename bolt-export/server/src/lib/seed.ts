@@ -8,6 +8,8 @@ const DEMO_ACCOUNTS = [
     accountNumber: "0123456789",
     balance: "245000.00",
     currency: "NGN",
+    accountType: "checking",
+    accountSubtype: null,
   },
   {
     bankId: "kuda",
@@ -16,18 +18,30 @@ const DEMO_ACCOUNTS = [
     accountNumber: "1098765432",
     balance: "87500.50",
     currency: "NGN",
+    accountType: "savings",
+    accountSubtype: "High Yield",
+  },
+  {
+    bankId: "access",
+    bankName: "Access Bank",
+    bankColor: "#E67E22",
+    accountNumber: "1122334455",
+    balance: "0.00",
+    currency: "NGN",
+    accountType: "credit",
+    accountSubtype: "Visa Gold",
   },
 ];
 
 const DEMO_TRANSACTIONS = [
-  { type: "credit", amount: "150000.00", description: "Monthly Salary", category: "Salary", recipientName: null, recipientBank: null, daysAgo: 2 },
-  { type: "debit", amount: "5200.00", description: "Transfer to Amaka Okonkwo", category: null, recipientName: "Amaka Okonkwo", recipientBank: "Access Bank", daysAgo: 3 },
-  { type: "debit", amount: "12500.00", description: "Transfer to Chidi Eze", category: null, recipientName: "Chidi Eze", recipientBank: "Zenith Bank", daysAgo: 5 },
-  { type: "credit", amount: "25000.00", description: "Freelance Payment", category: "Business Income", recipientName: null, recipientBank: null, daysAgo: 7 },
-  { type: "debit", amount: "3800.00", description: "Transfer to Ngozi Adeyemi", category: null, recipientName: "Ngozi Adeyemi", recipientBank: "UBA", daysAgo: 9 },
-  { type: "credit", amount: "8000.00", description: "Refund - Online Purchase", category: "Refund", recipientName: null, recipientBank: null, daysAgo: 12 },
-  { type: "debit", amount: "45000.00", description: "Rent Payment", category: "Other", recipientName: "Emeka Properties", recipientBank: "First Bank", daysAgo: 14 },
-  { type: "credit", amount: "15000.00", description: "Gift from Family", category: "Gift", recipientName: null, recipientBank: null, daysAgo: 18 },
+  { type: "credit", amount: "150000.00", description: "Monthly Salary", category: "Salary", recipientName: null, recipientBank: null, daysAgo: 2, isShared: false },
+  { type: "debit", amount: "5200.00", description: "Transfer to Amaka Okonkwo", category: null, recipientName: "Amaka Okonkwo", recipientBank: "Access Bank", daysAgo: 3, isShared: true },
+  { type: "debit", amount: "12500.00", description: "Transfer to Chidi Eze", category: null, recipientName: "Chidi Eze", recipientBank: "Zenith Bank", daysAgo: 5, isShared: false },
+  { type: "credit", amount: "25000.00", description: "Freelance Payment", category: "Business Income", recipientName: null, recipientBank: null, daysAgo: 7, isShared: true },
+  { type: "debit", amount: "3800.00", description: "Transfer to Ngozi Adeyemi", category: null, recipientName: "Ngozi Adeyemi", recipientBank: "UBA", daysAgo: 9, isShared: false },
+  { type: "credit", amount: "8000.00", description: "Refund - Online Purchase", category: "Refund", recipientName: null, recipientBank: null, daysAgo: 12, isShared: false },
+  { type: "debit", amount: "45000.00", description: "Rent Payment", category: "Other", recipientName: "Emeka Properties", recipientBank: "First Bank", daysAgo: 14, isShared: true },
+  { type: "credit", amount: "15000.00", description: "Gift from Family", category: "Gift", recipientName: null, recipientBank: null, daysAgo: 18, isShared: false },
 ];
 
 export async function seedUserData(
@@ -69,6 +83,7 @@ export async function seedUserData(
         note: null,
         recipientName: tx.recipientName ?? null,
         recipientBank: tx.recipientBank ?? null,
+        isShared: tx.isShared ?? false,
         createdAt: date,
       };
     })

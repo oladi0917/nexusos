@@ -49,6 +49,8 @@ export type AuthUser = {
   lastName: string;
   email: string;
   phone: string;
+  financialId: string | null;
+  creditScore: number | null;
   createdAt: string;
 };
 
@@ -62,6 +64,8 @@ export type Account = {
   accountName: string;
   balance: number;
   currency: string;
+  accountType: string;
+  accountSubtype: string | null;
   createdAt: string;
 };
 
@@ -81,6 +85,7 @@ export type Transaction = {
   note: string | null;
   recipientName: string | null;
   recipientBank: string | null;
+  isShared: boolean;
   createdAt: string;
 };
 
@@ -106,5 +111,49 @@ export type UserProfile = {
   phone: string;
   bvn: string | null;
   address: string | null;
+  financialId: string | null;
+  creditScore: number | null;
   createdAt: string;
+};
+
+// AI-related types
+export type CreditScoreData = {
+  creditScore: number;
+  factors: Array<{
+    name: string;
+    impact: "positive" | "negative" | "neutral";
+    score: number;
+  }>;
+};
+
+export type FinancialInsight = {
+  id: number;
+  title: string;
+  description: string;
+  type: "positive" | "negative" | "info";
+  actionable: boolean;
+};
+
+export type InsightsData = {
+  insights: FinancialInsight[];
+  summary: {
+    totalTransactions: number;
+    totalIncome: number;
+    totalExpenses: number;
+    averageTransaction: number;
+  };
+};
+
+export type AIAction = {
+  id: number;
+  title: string;
+  description: string;
+  type: "suggestion" | "info" | "warning";
+  icon: string;
+  estimatedSavings?: number;
+  estimatedReturn?: string;
+};
+
+export type ActionsData = {
+  actions: AIAction[];
 };

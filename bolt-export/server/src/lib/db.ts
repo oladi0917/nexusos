@@ -24,6 +24,8 @@ export const usersTable = pgTable("users", {
   phone: text("phone").notNull(),
   bvn: text("bvn"),
   address: text("address"),
+  financial_id: text("financial_id").unique(),
+  credit_score: integer("credit_score"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
@@ -38,6 +40,8 @@ export const accountsTable = pgTable("accounts", {
   accountName: text("account_name").notNull(),
   balance: numeric("balance", { precision: 15, scale: 2 }).notNull().default("0"),
   currency: text("currency").notNull().default("NGN"),
+  accountType: text("account_type").notNull().default('checking'),
+  accountSubtype: text("account_subtype"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -57,6 +61,7 @@ export const transactionsTable = pgTable("transactions", {
   note: text("note"),
   recipientName: text("recipient_name"),
   recipientBank: text("recipient_bank"),
+  isShared: boolean("is_shared").notNull().default(false),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

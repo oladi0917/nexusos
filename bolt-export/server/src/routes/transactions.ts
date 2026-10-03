@@ -61,4 +61,54 @@ router.patch("/transactions/:id", async (req, res): Promise<void> => {
   res.json({ ...tx, amount: parseFloat(tx.amount) });
 });
 
+// Get shared transactions for the user's network
+// For MVP, network = user's own shared transactions
+router.get("/transactions/shared", async (req, res): Promise<void> => {
+  try {
+    const limit = req.query.limit ? parseInt(String(req.query.limit), 10) : 50;
+
+    const txs = await db
+      .select()
+      .from(transactionsTable)
+      .where(and(
+        eq(transactionsTable.userId, req.userId!),
+        eq(transactionsTable.isShared, true)
+      ))
+      .orderBy(desc(transactionsTable.createdAt))
+      .limit(limit);
+
+    res.json(txs.map((t) => ({ ...t, amount: parseFloat(t.amount) })));
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch shared transactions" });
+  }
+});
+
+// Toggle shared status of a transaction
+router.patch("/transactions/:id/toggle-share", async (req, res): Promise<void> => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) { res.status(400).json({ error: "Invalid id" }); return; }
+
+    const [tx] = await db
+      .select()
+      .from(transactionsTable)
+      .where(and(eq(transactionsTable.id, id), eq(transactionsTable.userId, req.userId!)))
+      .limit(1);
+
+    if (!tx) { res.status(404).json({ error: "Transaction not found" }); return; }
+
+    const [updatedTx] = await db
+      .update(transactionsTable)
+      .set({ isShared: !tx.isShared })
+      .where(and(eq(transactionsTable.id, id), eq(transactionsTable.userId, req.userId!)))
+      .returning();
+
+    if (!updatedTx) { res.status(500).json({ error: "Failed to update transaction" }); return; }
+
+    res.json({ ...updatedTx, amount: parseFloat(updatedTx.amount) });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to toggle share status" });
+  }
+});
+
 export default router;

@@ -5,16 +5,16 @@ import {
   CreditCard,
   ArrowRightLeft,
   Send,
-  User,
+  Users,
 } from "lucide-react";
 import { NexusLogo } from "./NexusLogo";
 
 const TABS = [
   { path: "/dashboard", icon: LayoutDashboard, label: "Home" },
   { path: "/accounts", icon: CreditCard, label: "Accounts" },
-  { path: "/transactions", icon: ArrowRightLeft, label: "History" },
-  { path: "/send", icon: Send, label: "Send" },
-  { path: "/profile", icon: User, label: "Profile" },
+  { path: "/nexus", icon: Users, label: "Nexus" },
+  { path: "/send", icon: Send, label: "Payments" },
+  { path: "/transactions", icon: ArrowRightLeft, label: "Activity" },
 ];
 
 interface LayoutProps {
